@@ -13,48 +13,49 @@ namespace RecipeDropbox
     {
         // Register your own Dropbox app at https://www.dropbox.com/developers/apps
         // with "Full Dropbox" access level and set your app keys and app secret below
+       
         private const string DropboxAppKey = "yasr6seigaasi40";
         private const string DropboxAppSecret = "ukvg7gpncbtefgy";
-        
-        //private const string DropboxAppKey = "voqbdcv2l4s628w";
-        //private const string DropboxAppSecret = "is2id7hf4evzwn4";
 
-        //private const string OAuthTokenFileName = "OAuthTokenFileName.txt";
+        //this file is required in bin/Debug
+        private const string OAuthTokenFileName = "OAuthTokenFileName.txt";
 
-        //static void Main()
-        //{
-        //    DropboxServiceProvider dropboxServiceProvider =
-        //        new DropboxServiceProvider(DropboxAppKey, DropboxAppSecret, AccessLevel.AppFolder);
+        public static string UploadToDropBox(string filePath,string fileName)
+        {
+            DropboxServiceProvider dropboxServiceProvider =
+                new DropboxServiceProvider(DropboxAppKey, DropboxAppSecret, AccessLevel.AppFolder);
 
-        //    // Authenticate the application (if not authenticated) and load the OAuth token
-        //    if (!File.Exists(OAuthTokenFileName))
-        //    {
-        //        AuthorizeAppOAuth(dropboxServiceProvider);
-        //    }
-        //    OAuthToken oauthAccessToken = LoadOAuthToken();
+            // Authenticate the application (if not authenticated) and load the OAuth token
+            if (!File.Exists(OAuthTokenFileName))
+            {
+                AuthorizeAppOAuth(dropboxServiceProvider);
+            }
+            OAuthToken oauthAccessToken = LoadOAuthToken(OAuthTokenFileName);
 
-        //    // Login in Dropbox
-        //    IDropbox dropbox = dropboxServiceProvider.GetApi(oauthAccessToken.Value, oauthAccessToken.Secret);
+            // Login in Dropbox
+            IDropbox dropbox = dropboxServiceProvider.GetApi(oauthAccessToken.Value, oauthAccessToken.Secret);
 
-        //    // Display user name (from his profile)
-        //    DropboxProfile profile = dropbox.GetUserProfileAsync().Result;
-        //    //Console.WriteLine("Hi " + profile.DisplayName + "!");
+            // Display user name (from his profile)
+            DropboxProfile profile = dropbox.GetUserProfileAsync().Result;
+            //Console.WriteLine("Hi " + profile.DisplayName + "!");
 
-        //    // Create new folder
-        //    string newFolderName = "New_Folder_" + DateTime.Now.Ticks;
-        //    Entry createFolderEntry = dropbox.CreateFolderAsync(newFolderName).Result;
-        //   // Console.WriteLine("Created folder: {0}", createFolderEntry.Path);
+            // Create new folder
+            string newFolderName = "Recipe_" + DateTime.Now.Ticks;
+            Entry createFolderEntry = dropbox.CreateFolderAsync(newFolderName).Result;
+            // Console.WriteLine("Created folder: {0}", createFolderEntry.Path);
 
-        //    // Upload a file
-        //    Entry uploadFileEntry = dropbox.UploadFileAsync(
-        //        new FileResource("../../DropboxExample.cs"),
-        //        "/" + newFolderName + "/DropboxExample.cs").Result;
-        //   // Console.WriteLine("Uploaded a file: {0}", uploadFileEntry.Path);
+            // Upload a file
+            Entry uploadFileEntry = dropbox.UploadFileAsync(
+                new FileResource(filePath),
+                "/" + newFolderName + "/" + fileName).Result;
+            // Console.WriteLine("Uploaded a file: {0}", uploadFileEntry.Path);
 
-        //    // Share a file
-        //    DropboxLink sharedUrl = dropbox.GetShareableLinkAsync(uploadFileEntry.Path).Result;
-        //    Process.Start(sharedUrl.Url);
-        //}
+            // Share a file
+            DropboxLink sharedUrl = dropbox.GetShareableLinkAsync(uploadFileEntry.Path).Result;
+            Process.Start(sharedUrl.Url);
+
+            return sharedUrl.Url.ToString();
+        }
 
         public static OAuthToken LoadOAuthToken(string oAuthTokenFileName)
         {
