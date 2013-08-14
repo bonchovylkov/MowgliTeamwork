@@ -18,8 +18,16 @@ namespace TestClient
             RecipeContext db = new RecipeContext();
             Step step = new Step
             {
-                StepText="test step 1",
+                StepText="test step 5",
             };
+
+            var allSteps = db.Steps;
+
+            foreach (var s in allSteps)
+            {
+                Console.WriteLine(s.StepText);
+            }
+
             db.Steps.Add(step);
             db.SaveChanges();
         }
