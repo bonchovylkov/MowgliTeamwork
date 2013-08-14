@@ -44,7 +44,7 @@ namespace RecipeApi.Controllers
         // POST api/recipes
         public void Post([FromBody]Recipe value)
         {
-
+            var recipe = this.recipeRepository.Add(value);
         }
 
         // PUT api/recipes/5
@@ -59,18 +59,45 @@ namespace RecipeApi.Controllers
 
         private IEnumerable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
         {
-            throw new NotImplementedException();
+            var recipes = (from r in allRecipes
+                          select new RecepiesModel
+                          {
+                              RecipeId = r.RecipeId,
+                              RecipeName = r.RecipeName,
+                              FromUser = r.User.UserName,
+                              PictureLink = r.PictureLink,
+                              Products = r.Products
+                          }).AsEnumerable();
+            return recipes;
         }
 
         private RecipiesModelFull ConverRecipeToRecipeModelFull(Recipe recipe)
         {
-            var recipeModel = new RecepiesModel();
+            var recipeModel = new RecipiesModelFull();
             recipeModel.RecipeId = recipe.RecipeId;
             recipeModel.RecipeName = recipe.RecipeName;
             recipeModel.PictureLink = recipe.PictureLink;
             recipeModel.Products = recipe.Products;
             recipeModel.FromUser = recipe.User.UserName;
-            return null;
+            recipeModel.Steps = (from s in recipe.Steps
+                                 select new StepModel
+                                     {
+                                         StepId = s.StepId,
+                                         StepText = s.StepText,
+                                         ForRecipe = s.Recipe.RecipeName,
+                                     }).AsEnumerable();
+            return recipeModel;
         }
+
+        //private Recipe ConvertRecipeModelFullToRecipe(RecipiesModelFull recipeModel)
+        //{
+        //    Recipe recipe = new Recipe();
+        //    recipe.RecipeName = recipeModel.RecipeName;
+        //    recipe.Products = recipeModel.Products;
+        //    recipe.PictureLink = recipeModel.PictureLink;
+        //    recipe.User = new User();
+
+        //    return null;
+        //}
     }
 }
