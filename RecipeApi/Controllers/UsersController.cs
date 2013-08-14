@@ -64,13 +64,13 @@ namespace RecipeApi.Controllers
 
         [HttpPost]
         [ActionName("login")]
-        public HttpResponseMessage LoginUser(UserModel user)
+        public HttpResponseMessage LoginUser(UserLoginModel userModel)
         {
 
-            var sessionKey = (this.data as UserRepository).LoginUser(user.UserName, user.Password);
+            var user = (this.data as UserRepository).LoginUser(userModel.Username, userModel.Password);
             var loggedUser = new UserModel
             {
-                UserName = user.UserName,
+                UserName = userModel.Username,
                 SessionKey = user.SessionKey
             };
 

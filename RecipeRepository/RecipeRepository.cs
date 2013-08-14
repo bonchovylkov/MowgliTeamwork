@@ -22,8 +22,11 @@ namespace RecipeRepositories
         {
             using (context)
             {
-
+                
+                context.Recipies.Add(item);
+                context.SaveChanges();
             }
+
             return null;
         }
 
