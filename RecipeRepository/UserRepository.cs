@@ -77,7 +77,7 @@ namespace RecipeRepository
 
         }
 
-        public  User LoginUser(string username, string authCode)
+        public User LoginUser(string username, string authCode)
         {
             ValidateUsername(username);
             var context = new RecipeContext();

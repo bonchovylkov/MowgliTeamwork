@@ -51,8 +51,9 @@ namespace RecipeApi.Controllers
                 User userPost = DeserializeUserFromModel(user);
                 (this.data as UserRepository).CreateUser(userPost.UserName, userPost.Password);
                 var userDb = (this.data as UserRepository).LoginUser(user.UserName, user.Password);
+                var userModel = GetUserModelOne(userDb);
 
-                var message = this.Request.CreateResponse(HttpStatusCode.Created, userDb);
+                var message = this.Request.CreateResponse(HttpStatusCode.Created, userModel);
                 message.Headers.Location = new Uri(this.Request.RequestUri + userPost.UserId.ToString(CultureInfo.InvariantCulture));
                 return message;
             }
@@ -60,6 +61,16 @@ namespace RecipeApi.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
+        }
+
+        private object GetUserModelOne(RecipeModels.User userDb)
+        {
+            UserModel user = new UserModel();
+            user.UserId = userDb.UserId;
+            user.UserName = userDb.UserName;
+            user.SessionKey = userDb.SessionKey;
+
+            return user;
         }
 
         private User DeserializeUserFromModel(UserModel model)
@@ -83,6 +94,7 @@ namespace RecipeApi.Controllers
             {
                 UserId = user.UserId,
                 UserName = user.UserName,
+                SessionKey = user.SessionKey,
                 Recepies = from r in user.Recipes
                            select new RecepiesModel
                            {
@@ -117,7 +129,8 @@ namespace RecipeApi.Controllers
                                                       UserName=a.UserName,
                                                       RecepiesCount=a.Recipes.Count,
                                                       LikesCount = a.Likes.Count,
-                                                      CommentsCount = a.Comments.Count
+                                                      CommentsCount = a.Comments.Count,
+                                                      SessionKey = a.SessionKey,
                                                   };
 
             return userModels;
