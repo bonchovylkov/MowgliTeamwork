@@ -23,7 +23,7 @@ namespace RecipeApi.Controllers
 
         public LikesController()
         {
-            this.data = new DbRepositoryEF<Like>(new RecipeContext());
+            this.data = new LikeRepository(new RecipeContext());
         }
 
         // GET api/likes
