@@ -14,7 +14,7 @@ namespace RecipeModels
            this.Comments = new HashSet<Comment>();
        }
         public int RecipeId{ get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public string PictureLink { get; set; }
         public string Products { get; set; }
 
