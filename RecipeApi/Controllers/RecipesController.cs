@@ -11,6 +11,11 @@ namespace RecipeApi.Controllers
 {
     public class RecipesController : ApiController
     {
+        public RecipesController()
+        {
+
+        }
+
         public RecipesController(IRepository<RecepiesModel> repository)
         {
 
