@@ -14,3 +14,4 @@ namespace RecipeApi.Models
         public string ForRecipe { get; set; }
     }
 }
+
