@@ -77,7 +77,7 @@ namespace RecipeRepository
 
         }
 
-        public  string LoginUser(string username, string authCode)
+        public  User LoginUser(string username, string authCode)
         {
             ValidateUsername(username);
             var context = new RecipeContext();
@@ -93,7 +93,7 @@ namespace RecipeRepository
                 var sessionKey = GenerateSessionKey((int)user.UserId);
                 user.SessionKey = sessionKey;
                 context.SaveChanges();
-                return sessionKey;
+                return user;
             }
         }
 
