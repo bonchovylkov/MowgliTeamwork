@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RecipeApi.Models
 {
-    class RecepiesModel
+    public class RecepiesModel
     {
         public int RecipeId { get; set; }
         public string FromUser { get; set; }

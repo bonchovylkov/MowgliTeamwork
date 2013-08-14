@@ -301,6 +301,10 @@
       <Project>{c879d997-71cb-4520-a15a-a4503bb51c2c}</Project>
       <Name>RecipeModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RecipeRepository\RecipeRepository.csproj">
+      <Project>{f05c5aea-383f-4bd2-ae03-0543828e7803}</Project>
+      <Name>RecipeRepository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
