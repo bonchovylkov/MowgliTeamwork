@@ -19,7 +19,7 @@ namespace RecipeApi.App_Start
         static IRepository<Like> likesRepository =
             new DbRepositoryEF<Like>(new RecipeContext());
         static IRepository<User> usersRepository =
-            new DbRepositoryEF<User>(new RecipeContext());
+            new UserRepository(new RecipeContext());
         static IRepository<Comment> commentsRepository =
             new DbRepositoryEF<Comment>(new RecipeContext());
         static IRepository<Step> stepsRepository =

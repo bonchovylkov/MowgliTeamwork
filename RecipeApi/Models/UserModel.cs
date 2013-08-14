@@ -14,5 +14,6 @@ namespace RecipeApi.Models
         public int LikesCount { get; set; }
         public int CommentsCount { get; set; }
         public int RecepiesCount { get; set; }
+        public string SessionKey { get; set; }
     }
 }

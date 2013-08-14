@@ -14,17 +14,16 @@ namespace RecipeApi.Controllers
 {
     public class UsersController : ApiController
     {
-
         private readonly IRepository<User> data;
 
         public UsersController(IRepository<User> data)
         {
-            this.data = data;
+            this.data = data as UserRepository;
         }
 
         public UsersController()
         {
-            this.data = new DbRepositoryEF<User>(new RecipeContext());
+            this.data = new UserRepository(new RecipeContext());
         }
 
         public IQueryable<UserModel> Get()
@@ -42,15 +41,7 @@ namespace RecipeApi.Controllers
             return getUser;
         }
 
-        //public HttpResponseMessage Post([FromBody]UserModelFull user)
-        //{
-        //    User userPost = DeserializeFromModel(user);
-        //    this.data.Add(userPost);
-
-        //    var message = this.Request.CreateResponse(HttpStatusCode.Created);
-        //    message.Headers.Location = new Uri(this.Request.RequestUri + userPost.ArtistId.ToString(CultureInfo.InvariantCulture));
-        //    return message;
-        //}
+       
 
         // POST api/User
         public HttpResponseMessage PostUser(UserModel user)
@@ -58,7 +49,7 @@ namespace RecipeApi.Controllers
             if (ModelState.IsValid)
             {
                 User userPost = DeserializeUserFromModel(user);
-                this.data.Add(userPost);
+                (this.data as UserRepository).CreateUser(userPost.UserName,userPost.Password);
 
                 var message = this.Request.CreateResponse(HttpStatusCode.Created);
                 message.Headers.Location = new Uri(this.Request.RequestUri + userPost.UserId.ToString(CultureInfo.InvariantCulture));
