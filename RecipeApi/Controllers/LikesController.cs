@@ -62,7 +62,7 @@ namespace RecipeApi.Controllers
                                                      LikeId = l.LikeId,
                                                      LikeStatus = l.LikeStatus,
                                                      FromUser = l.User.UserName,
-                                                     //ForRecipe = l.Recipe.RecipeName
+                                                     ForRecipe = l.Recipe.Name
                                                  };
             return likeModels;
         }
