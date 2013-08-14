@@ -18,7 +18,7 @@ namespace TestClient
             RecipeContext db = new RecipeContext();
             Step step = new Step
             {
-                StepText="test step",
+                StepText="test step 1",
             };
             db.Steps.Add(step);
             db.SaveChanges();
