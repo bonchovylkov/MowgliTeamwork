@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Models\CommentsModel.cs" />
     <Compile Include="Models\LikesModel.cs" />
+    <Compile Include="Models\LikesModelFull.cs" />
     <Compile Include="Models\RecepiesModel.cs" />
     <Compile Include="Models\RecipieModelFull.cs" />
     <Compile Include="Models\StepModel.cs" />
