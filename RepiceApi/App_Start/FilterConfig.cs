@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace RepiceApi
+namespace RecipeApi
 {
     public class FilterConfig
     {

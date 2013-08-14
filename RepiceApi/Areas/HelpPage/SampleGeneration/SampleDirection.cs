@@ -1,4 +1,4 @@
-namespace RepiceApi.Areas.HelpPage
+namespace RecipeApi.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using RepiceApi.Areas.HelpPage.Models;
+using RecipeApi.Areas.HelpPage.Models;
 
-namespace RepiceApi.Areas.HelpPage
+namespace RecipeApi.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

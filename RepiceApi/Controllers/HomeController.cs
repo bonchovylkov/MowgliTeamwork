@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace RepiceApi.Controllers
+namespace RecipeApi.Controllers
 {
     public class HomeController : Controller
     {

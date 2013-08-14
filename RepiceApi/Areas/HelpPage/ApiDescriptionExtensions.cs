@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace RepiceApi.Areas.HelpPage
+namespace RecipeApi.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

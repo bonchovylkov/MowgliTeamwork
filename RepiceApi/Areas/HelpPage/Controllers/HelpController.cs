@@ -1,9 +1,9 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using RepiceApi.Areas.HelpPage.Models;
+using RecipeApi.Areas.HelpPage.Models;
 
-namespace RepiceApi.Areas.HelpPage.Controllers
+namespace RecipeApi.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.
