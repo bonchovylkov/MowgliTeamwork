@@ -20,7 +20,11 @@ namespace RecipeRepositories
 
         public Recipe Add(Recipe item)
         {
-            throw new NotImplementedException();
+            using (context)
+            {
+
+            }
+            return null;
         }
 
         public Recipe Update(int id, Recipe item)
