@@ -7,7 +7,7 @@ using System.Web.Http;
 using RecipeModels;
 using RecipeData;
 using RecipeApi.Models;
-using RecipeRepositories;
+using RecipeRepository;
 using System.Globalization;
 
 namespace RecipeApi.Controllers

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RecipeModels;
-namespace RecipeRepositories
+namespace RecipeRepository
 {
     public class UserRepository : IRepository<User>
     {

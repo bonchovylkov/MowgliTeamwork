@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace RecipeRepositories
+namespace RecipeRepository
 {
     public interface IRepository<T>
     {

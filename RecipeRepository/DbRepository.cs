@@ -6,7 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
-namespace RecipeRepositories
+namespace RecipeRepository
 {
     public class DbRepositoryEF<T> : IRepository<T> where T : class
     {

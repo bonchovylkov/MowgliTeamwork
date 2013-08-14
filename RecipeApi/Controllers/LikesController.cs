@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using RecipeRepositories;
+using RecipeRepository;
 using RecipeModels;
 using RecipeData;
 using RecipeApi.Models;
