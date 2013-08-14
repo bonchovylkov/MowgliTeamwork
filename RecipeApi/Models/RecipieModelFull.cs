@@ -16,5 +16,6 @@ namespace RecipeApi.Models
         public IEnumerable<UserModel> Users { get; set; }
         public IEnumerable<LikesModel> Likes { get; set; }
         public IEnumerable<CommentsModel> Comments { get; set; }
+        public IEnumerable<StepModel> Steps { get; set; }
     }
 }
