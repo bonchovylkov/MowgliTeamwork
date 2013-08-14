@@ -11,6 +11,7 @@ namespace RecipeApi.Models
         public string FromUser { get; set; }
         public string PictureLink { get; set; }
         public string Products { get; set; }
+        public string RecipeName { get; set; }
 
     }
 }

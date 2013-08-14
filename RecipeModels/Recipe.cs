@@ -17,6 +17,7 @@ namespace RecipeModels
         public virtual User User { get; set; }
         public string PictureLink { get; set; }
         public string Products { get; set; }
+        public string RecipeName { get; set; }
 
         public virtual ICollection<Step> Steps { get; set; }
         public virtual ICollection<Like> Likes { get; set; }

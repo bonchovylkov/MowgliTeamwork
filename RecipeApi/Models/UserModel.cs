@@ -12,7 +12,7 @@ namespace RecipeApi.Models
         public string Password { get; set; }
         public string Picture { get; set; }
         public int LikesCount { get; set; }
-        public int Commnets { get; set; }
+        public int CommentsCount { get; set; }
         public int RecepiesCount { get; set; }
     }
 }
