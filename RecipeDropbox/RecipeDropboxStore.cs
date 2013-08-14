@@ -20,7 +20,7 @@ namespace RecipeDropbox
         //this file is required in bin/Debug
         private const string OAuthTokenFileName = "OAuthTokenFileName.txt";
 
-        public static string UploadToDropBox(string filePath,string fileName)
+        public static string UploadToDropBox(string filePath, string fileName)
         {
             DropboxServiceProvider dropboxServiceProvider =
                 new DropboxServiceProvider(DropboxAppKey, DropboxAppSecret, AccessLevel.AppFolder);
