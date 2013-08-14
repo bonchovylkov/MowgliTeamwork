@@ -1,11 +1,15 @@
-﻿using System;
+﻿using RecipeData;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RecipeData.Migrations;
+
 
 namespace RecipeApi
 {
@@ -17,6 +21,7 @@ namespace RecipeApi
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeContext, Configuration>());
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

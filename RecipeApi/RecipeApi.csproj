@@ -287,6 +287,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeData\RecipeData.csproj">
+      <Project>{93c8ed71-dd4c-4b88-8514-4697b353a366}</Project>
+      <Name>RecipeData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecipeModels\RecipeModels.csproj">
+      <Project>{c879d997-71cb-4520-a15a-a4503bb51c2c}</Project>
+      <Name>RecipeModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
