@@ -7,7 +7,7 @@
     <ProjectGuid>{F05C5AEA-383F-4BD2-AE03-0543828E7803}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RecipeRepository</RootNamespace>
+    <RootNamespace>RecipeRepositories</RootNamespace>
     <AssemblyName>RecipeRepository</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="DbRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="LikeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecipeRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

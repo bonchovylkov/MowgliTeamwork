@@ -33,7 +33,6 @@ namespace RecipeApi.Controllers
             return getUserModel;
         }
 
-        
         public UserModelFull Get(int id)
         {
             User user = this.data.Get(id);
@@ -41,13 +40,13 @@ namespace RecipeApi.Controllers
             return getUser;
         }
 
-       
-
         // POST api/User
+        [HttpPost]
+        [ActionName("register")]
         public HttpResponseMessage PostUser(UserModel user)
         {
             if (ModelState.IsValid)
-            { 
+            {
                 User userPost = DeserializeUserFromModel(user);
                 (this.data as UserRepository).CreateUser(userPost.UserName, userPost.Password);
                 var userDb = (this.data as UserRepository).LoginUser(user.UserName, user.Password);
@@ -61,6 +60,33 @@ namespace RecipeApi.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
+        }
+
+        [HttpPost]
+        [ActionName("login")]
+        public HttpResponseMessage LoginUser(UserModel user)
+        {
+
+            var sessionKey = (this.data as UserRepository).LoginUser(user.UserName, user.Password);
+            var loggedUser = new UserModel
+            {
+                UserName = user.UserName,
+                SessionKey = user.SessionKey
+            };
+
+            var message = this.Request.CreateResponse(HttpStatusCode.Created, loggedUser);
+            message.Headers.Location = new Uri(this.Request.RequestUri + loggedUser.UserId.ToString(CultureInfo.InvariantCulture));
+            return message;
+        }
+
+        [HttpGet]
+        [ActionName("logout")]
+        public HttpResponseMessage LogoutUser(string sessionKey)
+        {
+
+            (this.data as UserRepository).LogoutUser(sessionKey);
+            var message = this.Request.CreateResponse(HttpStatusCode.Gone);
+            return message;
         }
 
         private object GetUserModelOne(RecipeModels.User userDb)
@@ -78,15 +104,14 @@ namespace RecipeApi.Controllers
 
             User user = new User()
             {
-               UserId=model.UserId,
-               UserName=model.UserName,
-               Password=model.Password,
-               Picture=model.Picture
+                UserId = model.UserId,
+                UserName = model.UserName,
+                Password = model.Password,
+                Picture = model.Picture
             };
 
             return user;
         }
-
 
         private UserModelFull GetUserFull(RecipeModels.User user)
         {
@@ -103,17 +128,18 @@ namespace RecipeApi.Controllers
                                Products = r.Products,
                            },
                 Likes = from l in user.Likes
-                        select new LikesModel {
+                        select new LikesModel
+                        {
                             FromUser = l.User.UserName,
                             ForRecipe = l.Recipe.RecipeName,
                             LikeStatus = l.LikeStatus
                         },
                 Comments = from c in user.Comments
                            select new CommentsModel
-                           { 
-                                FromUser = c.User.UserName,
-                                ForRecipe = c.Recipe.RecipeName,
-                                CommnetTet= c.CommentText
+                           {
+                               FromUser = c.User.UserName,
+                               ForRecipe = c.Recipe.RecipeName,
+                               CommnetTet = c.CommentText
                            }
             };
 
@@ -123,18 +149,17 @@ namespace RecipeApi.Controllers
         private IQueryable<UserModel> GetUserModel(IQueryable<User> user)
         {
             IQueryable<UserModel> userModels = from a in user
-                                                  select new UserModel
-                                                  {
-                                                      UserId = a.UserId,
-                                                      UserName=a.UserName,
-                                                      RecepiesCount=a.Recipes.Count,
-                                                      LikesCount = a.Likes.Count,
-                                                      CommentsCount = a.Comments.Count,
-                                                      SessionKey = a.SessionKey,
-                                                  };
+                                               select new UserModel
+                                               {
+                                                   UserId = a.UserId,
+                                                   UserName = a.UserName,
+                                                   RecepiesCount = a.Recipes.Count,
+                                                   LikesCount = a.Likes.Count,
+                                                   CommentsCount = a.Comments.Count,
+                                                   SessionKey = a.SessionKey,
+                                               };
 
             return userModels;
         }
-
     }
 }
