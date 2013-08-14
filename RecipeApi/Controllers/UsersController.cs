@@ -8,6 +8,7 @@ using RecipeModels;
 using RecipeData;
 using RecipeApi.Models;
 using RecipeRepository;
+using System.Globalization;
 
 namespace RecipeApi.Controllers
 {
@@ -33,6 +34,7 @@ namespace RecipeApi.Controllers
             return getUserModel;
         }
 
+        
         public UserModelFull Get(int id)
         {
             User user = this.data.Get(id);
@@ -42,13 +44,46 @@ namespace RecipeApi.Controllers
 
         //public HttpResponseMessage Post([FromBody]UserModelFull user)
         //{
-        //    User artist = DeserializeFromModel(user);
-        //    this.data.Add(artist);
+        //    User userPost = DeserializeFromModel(user);
+        //    this.data.Add(userPost);
 
         //    var message = this.Request.CreateResponse(HttpStatusCode.Created);
-        //    message.Headers.Location = new Uri(this.Request.RequestUri + artist.ArtistId.ToString(CultureInfo.InvariantCulture));
+        //    message.Headers.Location = new Uri(this.Request.RequestUri + userPost.ArtistId.ToString(CultureInfo.InvariantCulture));
         //    return message;
         //}
+
+        // POST api/User
+        public HttpResponseMessage PostUser(UserModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                User userPost = DeserializeUserFromModel(user);
+                this.data.Add(userPost);
+
+                var message = this.Request.CreateResponse(HttpStatusCode.Created);
+                message.Headers.Location = new Uri(this.Request.RequestUri + userPost.UserId.ToString(CultureInfo.InvariantCulture));
+                return message;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+        private User DeserializeUserFromModel(UserModel model)
+        {
+
+            User user = new User()
+            {
+               UserId=model.UserId,
+               UserName=model.UserName,
+               Password=model.Password,
+               Picture=model.Picture
+            };
+
+            return user;
+        }
+
 
         private UserModelFull GetUserFull(RecipeModels.User user)
         {
