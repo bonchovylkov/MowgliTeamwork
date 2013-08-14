@@ -31,6 +31,22 @@ namespace RecipeApi.App_Start
             {
                 return new RecipesController(recipesRepository);
             }
+            else if (serviceType == typeof(UsersController))
+            {
+                return new UsersController(usersRepository);
+            }
+            //else if (serviceType == typeof(CommentsController))
+            //{
+            //    return new CommentsController(commentsRepository);
+            //}
+            else if (serviceType == typeof(LikesController))
+            {
+                return new LikesController(likesRepository);
+            }
+            //else if (serviceType == typeof(StepsController))
+            //{
+            //    return new StepsController(stepsRepository);
+            //}
             else
             {
                 return null;
