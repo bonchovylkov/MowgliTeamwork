@@ -66,7 +66,9 @@ namespace RecipeApi.Controllers
 
         private IEnumerable<CommentsModel> ConvertComments(IEnumerable<Comment> comments)
         {
+            
             IEnumerable<CommentsModel> commentModels = from c in comments
+                                                       where c.User!=null && c.Recipe != null
                                                        select new CommentsModel
                                                        {
                                                            CommentId = c.CommentId,
