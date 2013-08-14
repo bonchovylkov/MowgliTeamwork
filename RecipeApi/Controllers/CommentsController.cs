@@ -1,7 +1,7 @@
 ﻿using RecipeApi.Models;
 using RecipeData;
 using RecipeModels;
-using RecipeRepository;
+using RecipeRepositories;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
