@@ -51,8 +51,9 @@ namespace RecipeApi.Controllers
                 User userPost = DeserializeUserFromModel(user);
                 (this.data as UserRepository).CreateUser(userPost.UserName, userPost.Password);
                 var sessionKey = (this.data as UserRepository).LoginUser(user.UserName, user.Password);
+                userPost.SessionKey = sessionKey;
 
-                var message = this.Request.CreateResponse(HttpStatusCode.Created);
+                var message = this.Request.CreateResponse(HttpStatusCode.Created, userPost);
                 message.Headers.Location = new Uri(this.Request.RequestUri + userPost.UserId.ToString(CultureInfo.InvariantCulture));
                 return message;
             }
