@@ -43,13 +43,13 @@ namespace RecipeApi.Controllers
         }
 
         // POST api/likes
-        public HttpResponseMessage Post([FromBody]LikesModelFull model)
+        public HttpResponseMessage Post([FromBody]Like model)
         {
-            Like like = DeserializeFromModel(model);
-            this.data.Add(like);
+            //Like like = DeserializeFromModel(model);
+            this.data.Add(model);
 
             var message = this.Request.CreateResponse(HttpStatusCode.Created);
-            message.Headers.Location = new Uri(this.Request.RequestUri + like.LikeId.ToString(CultureInfo.InvariantCulture));
+            message.Headers.Location = new Uri(this.Request.RequestUri + model.LikeId.ToString(CultureInfo.InvariantCulture));
             return message;
         }
 
@@ -89,16 +89,16 @@ namespace RecipeApi.Controllers
             return likeModel;
         }
 
-        private Like DeserializeFromModel(LikesModelFull model)
-        {
-            Like like = new Like()
-            {
-                LikeId = model.LikeId,
-                LikeStatus = model.LikeStatus,
-                User = model.User,
-                Recipe = model.Recipe
-            };
-            return like;
-        }
+        //private Like DeserializeFromModel(LikesModelFull model)
+        //{
+        //    Like like = new Like()
+        //    {
+        //        LikeId = model.LikeId,
+        //        LikeStatus = model.LikeStatus,
+        //        User = model.User,
+        //        Recipe = model.Recipe
+        //    };
+        //    return like;
+        //}
     }
 }
