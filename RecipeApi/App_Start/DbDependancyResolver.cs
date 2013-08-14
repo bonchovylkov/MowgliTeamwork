@@ -21,8 +21,8 @@ namespace RecipeApi.App_Start
             new DbRepositoryEF<UserModel>(new RecipeContext());
         static IRepository<CommentsModel> commentsRepository =
             new DbRepositoryEF<CommentsModel>(new RecipeContext());
-        static IRepository<StepsModel> stepsRepository =
-            new DbRepositoryEF<StepsModel>(new RecipeContext());
+        static IRepository<StepModel> stepsRepository =
+            new DbRepositoryEF<StepModel>(new RecipeContext());
 
         public object GetService(Type serviceType)
         {
