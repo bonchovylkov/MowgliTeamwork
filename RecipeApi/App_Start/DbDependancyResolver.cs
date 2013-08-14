@@ -8,21 +8,22 @@ using RecipeApi.Models;
 using RecipeData;
 using System.Data.Entity;
 using RecipeApi.Controllers;
+using RecipeModels;
 
 namespace RecipeApi.App_Start
 {
     public class DbDependencyResolver : IDependencyResolver
     {
-        static IRepository<RecepiesModel> recipesRepository = 
-            new DbRepositoryEF<RecepiesModel>(new RecipeContext());
-        static IRepository<LikesModel> likesRepository =
-            new DbRepositoryEF<LikesModel>(new RecipeContext());
-        static IRepository<UserModel> usersRepository =
-            new DbRepositoryEF<UserModel>(new RecipeContext());
-        static IRepository<CommentsModel> commentsRepository =
-            new DbRepositoryEF<CommentsModel>(new RecipeContext());
-        static IRepository<StepModel> stepsRepository =
-            new DbRepositoryEF<StepModel>(new RecipeContext());
+        static IRepository<Recipe> recipesRepository =
+            new DbRepositoryEF<Recipe>(new RecipeContext());
+        static IRepository<Like> likesRepository =
+            new DbRepositoryEF<Like>(new RecipeContext());
+        static IRepository<User> usersRepository =
+            new DbRepositoryEF<User>(new RecipeContext());
+        static IRepository<Comment> commentsRepository =
+            new DbRepositoryEF<Comment>(new RecipeContext());
+        static IRepository<Step> stepsRepository =
+            new DbRepositoryEF<Step>(new RecipeContext());
 
         public object GetService(Type serviceType)
         {
