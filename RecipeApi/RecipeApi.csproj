@@ -170,6 +170,7 @@
     <Compile Include="Models\LikesModel.cs" />
     <Compile Include="Models\RecepiesModel.cs" />
     <Compile Include="Models\RecipieModelFull.cs" />
+    <Compile Include="Models\StepModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserModelFull.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
