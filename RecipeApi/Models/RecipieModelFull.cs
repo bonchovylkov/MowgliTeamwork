@@ -9,11 +9,11 @@ namespace RecipeApi.Models
     {
         public RecipiesModelFull()
         {
-            this.Users = new UserModel();
+            this.User = new UserModel();
             this.Likes = new HashSet<LikesModel>();
             this.Comments=new HashSet<CommentsModel>();
         }
-        public UserModel Users { get; set; }
+        public UserModel User { get; set; }
         public IEnumerable<LikesModel> Likes { get; set; }
         public IEnumerable<CommentsModel> Comments { get; set; }
         public IEnumerable<StepModel> Steps { get; set; }
