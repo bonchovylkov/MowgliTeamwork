@@ -54,17 +54,25 @@ namespace RecipeApi.Controllers
         [ActionName("addrecipe")]
         public HttpResponseMessage AddRecipe(string sessionKey, [FromBody] RecepiesModel recipeModel)
         {
-            var UserRep = new UserRepository(new RecipeContext());
-            var userId = UserRep.LoginUser(sessionKey);
-            var recipe = ConvertFromModelToDbRecipe(recipeModel);
-            var recipeToReturn = (this.recipeRepository as RecipeRepositoryyy).AddRecipe(userId, recipe);
-            RecipiesModelFull rep = ConverRecipeToRecipeModelFull(recipeToReturn);
-            var message = this.Request.CreateResponse(HttpStatusCode.Created, rep);
-            message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
-            return message;
+            try
+            {
+                var UserRep = new UserRepository(new RecipeContext());
+                var userId = UserRep.LoginUser(sessionKey);
+                var recipe = ConvertFromModelToDbRecipe(recipeModel);
+                var recipeToReturn = (this.recipeRepository as RecipeRepositoryyy).AddRecipe(userId, recipe);
+                RecipiesModelFull rep = ConverRecipeToRecipeModelFull(recipeToReturn);
+                var message = this.Request.CreateResponse(HttpStatusCode.Created, rep);
+                message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
+                return message;
+            }
+            catch (Exception ex)
+            {
+                var response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+                return response;
+            }
         }
 
-        
+
 
         private Recipe ConvertFromModelToDbRecipe(RecepiesModel recipeModel)
         {
@@ -72,11 +80,11 @@ namespace RecipeApi.Controllers
             {
                 RecipeName = recipeModel.RecipeName,
                 Products = recipeModel.Products,
-               // PictureLink = recipeModel.PictureLink
+                // PictureLink = recipeModel.PictureLink
             };
             return rep;
         }
-       
+
 
         private IQueryable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
         {
@@ -139,7 +147,7 @@ namespace RecipeApi.Controllers
                 UserName = recipe.User.UserName,
                 SessionKey = recipe.User.SessionKey
             };
-            
+
             return recipeModel;
         }
 
