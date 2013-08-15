@@ -10814,7 +10814,7 @@ $.widget( "ui.tabs", {
 
 			// Take disabling tabs via class attribute from HTML
 			// into account and update option properly.
-			// A selected tab cannot become disabled.
+			// A selected tab recipeFromUsercome disabled.
 			o.disabled = $.unique( o.disabled.concat(
 				$.map( this.lis.filter( ".ui-state-disabled" ), function( n, i ) {
 					return self.lis.index( n );

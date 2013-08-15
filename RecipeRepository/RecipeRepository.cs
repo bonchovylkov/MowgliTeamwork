@@ -71,7 +71,19 @@ namespace RecipeRepositories
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var context = new RecipeContext();
+            
+            foreach (var rep in context.Recipies)
+            {
+               
+                rep.User = null;
+                rep.Steps = null;
+                rep.RecipeName = null;
+                rep.RecipeId = null;
+                rep.Products = null;
+                rep.PictureLink = null;
+            }
+            context.SaveChanges();
         }
 
         public void Delete(Recipe item)

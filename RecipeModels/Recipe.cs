@@ -13,7 +13,7 @@ namespace RecipeModels
            this.Likes = new HashSet<Like>();
            this.Comments = new HashSet<Comment>();
        }
-        public int RecipeId{ get; set; }
+        public int? RecipeId{ get; set; }
         public virtual User User { get; set; }
         public string PictureLink { get; set; }
         public string Products { get; set; }
