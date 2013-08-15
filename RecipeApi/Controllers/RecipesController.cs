@@ -82,11 +82,9 @@ namespace RecipeApi.Controllers
 
         [HttpGet]
         [ActionName("deleteall")]
-        public void AddRecipe(int id)
+        public void DeleteAll(int id)
         {
-          
                 (this.recipeRepository as RecipeRepositoryyy).Delete(id);
-            
         }
 
 
