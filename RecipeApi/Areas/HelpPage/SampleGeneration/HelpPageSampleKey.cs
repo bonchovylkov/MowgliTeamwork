@@ -103,25 +103,25 @@ namespace RecipeApi.Areas.HelpPage
         /// <summary>
         /// Gets the name of the controller.
         /// </summary>
-        /// <value>
+        /// <model>
         /// The name of the controller.
-        /// </value>
+        /// </model>
         public string ControllerName { get; private set; }
 
         /// <summary>
         /// Gets the name of the action.
         /// </summary>
-        /// <value>
+        /// <model>
         /// The name of the action.
-        /// </value>
+        /// </model>
         public string ActionName { get; private set; }
 
         /// <summary>
         /// Gets the media type.
         /// </summary>
-        /// <value>
+        /// <model>
         /// The media type.
-        /// </value>
+        /// </model>
         public MediaTypeHeaderValue MediaType { get; private set; }
 
         /// <summary>

@@ -9,6 +9,7 @@ using RecipeApi.Models;
 using RecipeData;
 using RecipeModels;
 using System.IO;
+using System.Web.Http.Cors;
 
 namespace RecipeApi.Controllers
 {
@@ -43,13 +44,16 @@ namespace RecipeApi.Controllers
         }
 
         // POST api/recipes
-        public void Post([FromBody]Recipe value)
+        [HttpPost]
+        [EnableCors("*", "*", "*")]
+        public void Post([FromBody]RecipiesModelFull model)
         {
-            var recipe = this.recipeRepository.Add(value);
+            var recipe = DeserializeRecipeFromModelFull(model);
+            this.recipeRepository.Add(recipe);
         }
 
         // PUT api/recipes/5
-        public void Put(int id, [FromBody]Recipe value)
+        public void Put(int id, [FromBody]RecipiesModelFull value)
         {
         }
 
@@ -61,15 +65,39 @@ namespace RecipeApi.Controllers
         private IEnumerable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
         {
             var recipes = (from r in allRecipes
-                          select new RecepiesModel
-                          {
-                              RecipeId = r.RecipeId,
-                              RecipeName = r.RecipeName,
-                              FromUser = r.User.UserName,
-                              PictureLink = r.PictureLink,
-                              Products = r.Products
-                          }).AsEnumerable();
+                           select new RecepiesModel
+                           {
+                               RecipeId = r.RecipeId,
+                               RecipeName = r.RecipeName,
+                               FromUser = r.User.UserName,
+                               PictureLink = r.PictureLink,
+                               Products = r.Products
+                           }).AsEnumerable();
             return recipes;
+        }
+
+        private Recipe DeserializeRecipeFromModelFull(RecipiesModelFull model)
+        {
+            Recipe recipe = new Recipe
+            {
+                RecipeId = model.RecipeId,
+                RecipeName = model.RecipeName,
+                Products = model.Products,
+                PictureLink = model.PictureLink,
+            };
+
+            if (model.Steps != null)
+            {
+                recipe.Steps = (ICollection<Step>)
+                    (from s in model.Steps
+                     select new Step
+                     {
+                         StepId = s.StepId,
+                         StepText = s.StepText,
+                     });
+            }
+
+            return recipe;
         }
 
         private RecipiesModelFull ConverRecipeToRecipeModelFull(Recipe recipe)

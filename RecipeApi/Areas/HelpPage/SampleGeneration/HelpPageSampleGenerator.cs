@@ -69,7 +69,7 @@ namespace RecipeApi.Areas.HelpPage
         /// Gets the request or response body samples.
         /// </summary>
         /// <param name="api">The <see cref="ApiDescription"/>.</param>
-        /// <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+        /// <param name="sampleDirection">The model indicating whether the sample is for a request or for a response.</param>
         /// <returns>The samples keyed by media type.</returns>
         public virtual IDictionary<MediaTypeHeaderValue, object> GetSample(ApiDescription api, SampleDirection sampleDirection)
         {
@@ -128,7 +128,7 @@ namespace RecipeApi.Areas.HelpPage
         /// <param name="type">The CLR type.</param>
         /// <param name="formatter">The formatter.</param>
         /// <param name="mediaType">The media type.</param>
-        /// <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+        /// <param name="sampleDirection">The model indicating whether the sample is for a request or for a response.</param>
         /// <returns>The sample that matches the parameters.</returns>
         public virtual object GetActionSample(string controllerName, string actionName, IEnumerable<string> parameterNames, Type type, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType, SampleDirection sampleDirection)
         {
@@ -168,13 +168,13 @@ namespace RecipeApi.Areas.HelpPage
         }
 
         /// <summary>
-        /// Resolves the type of the action parameter or return value when <see cref="HttpRequestMessage"/> or <see cref="HttpResponseMessage"/> is used.
+        /// Resolves the type of the action parameter or return model when <see cref="HttpRequestMessage"/> or <see cref="HttpResponseMessage"/> is used.
         /// </summary>
         /// <param name="api">The <see cref="ApiDescription"/>.</param>
         /// <param name="controllerName">Name of the controller.</param>
         /// <param name="actionName">Name of the action.</param>
         /// <param name="parameterNames">The parameter names.</param>
-        /// <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+        /// <param name="sampleDirection">The model indicating whether the sample is for a request or a response.</param>
         /// <param name="formatters">The formatters.</param>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "This is only used in advanced scenarios.")]
         public virtual Type ResolveType(ApiDescription api, string controllerName, string actionName, IEnumerable<string> parameterNames, SampleDirection sampleDirection, out Collection<MediaTypeFormatter> formatters)
@@ -226,7 +226,7 @@ namespace RecipeApi.Areas.HelpPage
         /// Writes the sample object using formatter.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
-        /// <param name="value">The value.</param>
+        /// <param name="model">The model.</param>
         /// <param name="type">The type.</param>
         /// <param name="mediaType">Type of the media.</param>
         /// <returns></returns>
