@@ -102,14 +102,11 @@ var persisters = (function () {
 				    success(data);
 				}, error);
 	    },
-	    logout: function (success, error) {
-	        var url = this.rootUrl + "logout/" + sessionKey;
+	    getByUser: function (success, error) {
+	        var url = this.rootUrl + "getbyuser/" + sessionKey;
 	        httpRequester.getJSON(url, function (data) {
-	            clearUserData();
 	            success(data);
-
 	        },
-            clearUserData(),
             error)
 	    },
 	    scores: function (success, error) {

@@ -70,36 +70,36 @@
 		return list;
 	}
 
-	//function buildActiveRecipeList(Recipe) {
-	//	var RecipeList = Array.prototype.slice.call(Recipe, 0);
-	//	RecipeList.sort(function (g1, g2) {
-	//		if (g1.status == g2.status) {
-	//			return g1.title > g2.title;
-	//		}
-	//		else {
-	//			if (g1.status == "in-progress") {
-	//				return -1;
-	//			}
-	//		}
-	//		return 1;
-	//	});
+	function buildActiveRecipeList(Recipe) {
+		//var RecipeList = Array.prototype.slice.call(Recipe, 0);
+		//RecipeList.sort(function (g1, g2) {
+		//	if (g1.status == g2.status) {
+		//		return g1.title > g2.title;
+		//	}
+		//	else {
+		//		if (g1.status == "in-progress") {
+		//			return -1;
+		//		}
+		//	}
+		//	return 1;
+		//});
 
-	//	var list = '<ul class="game-list active-Recipe">';
-	//	for (var i = 0; i < RecipeList.length; i++) {
-	//		var game = RecipeList[i];
-	//		list +=
-	//			'<li class="game-status-' + game.status + '" data-game-id="' + game.id + '" data-creator="' + game.creatorNickname + '">' +
-	//				'<a href="#" class="btn-active-game">' +
-	//					$("<div />").html(game.title).text() +
-	//				'</a>' +
-	//				'<span> by ' +
-	//					game.creatorNickname +
-	//				'</span>' +
-	//			'</li>';
-	//	}
-	//	list += "</ul>";
-	//	return list;
-	//}
+	    var list = '<ul class="game-list open-Recipe">';
+	    for (var i = 0; i < Recipe.length; i++) {
+	        var rep = Recipe[i];
+	        list +=
+				'<li data-game-id="' + rep.RecipeId + '">  Name:' +
+					'<a href="#" >' +
+						$("<div />").html(rep.RecipeName).text() +
+					'</a>' +
+					'<span> Made from' +
+						rep.Products +
+					'</span>' +
+				'</li>';
+	    }
+	    list += "</ul>";
+	    return list;
+	}
 
 	//function buildGuessTable(guesses) {
 	//	var tableHtml =
@@ -168,8 +168,8 @@
 	return {
 		recipeUI: buildrecipeUI,
 		loadAllReps: buildloadAllReps,
-		loginForm: buildLoginForm
-		//activeRecipeList: buildActiveRecipeList,
+		loginForm: buildLoginForm,
+	    recipeFromUser: buildActiveRecipeList,
 		//Recipetate: buildRecipetate,
 		//messagesList: buildMessagesList
 	}

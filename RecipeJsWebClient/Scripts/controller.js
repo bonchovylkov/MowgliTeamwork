@@ -166,7 +166,7 @@ var controllers = (function () {
 		//			.html(list);
 		//	});
 		//	this.persister.game.myActive(function (games) {
-		//		var list = ui.activeGamesList(games);
+		//		var list = ui.recipeFromUser(games);
 		//		$(selector + " #active-games")
 		//			.html(list);
 		//	});

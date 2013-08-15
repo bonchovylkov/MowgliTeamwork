@@ -181,11 +181,11 @@ var controllers = (function () {
 			    $(selector + " #allRecipies")
 					.html(list);
 			});
-			//this.persister.game.myActive(function (games) {
-			//	var list = ui.activeGamesList(games);
-			//	$(selector + " #active-games")
-			//		.html(list);
-			//});
+			this.persister.recipe.getByUser(function (games) {
+				var list = ui.recipeFromUser(games);
+			    $(selector + " #userReps")
+					.html(list);
+			});
 			//this.persister.message.all(function (msg) {
 			//	var msgList = ui.messagesList(msg);
 			//	$(selector + " #messages-holder").html(msgList);

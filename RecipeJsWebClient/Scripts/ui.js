@@ -70,7 +70,7 @@
 	//	return list;
 	//}
 
-	//function buildActiveGamesList(games) {
+	//function buildrecipeFromUser(games) {
 	//	var gamesList = Array.prototype.slice.call(games, 0);
 	//	gamesList.sort(function (g1, g2) {
 	//		if (g1.status == g2.status) {
@@ -169,7 +169,7 @@
 		//recipeUI: buildrecipeUI
 		//loadAllReps: buildloadAllReps,
 		loginForm: buildLoginForm
-		//activeGamesList: buildActiveGamesList,
+		//recipeFromUser: buildrecipeFromUser,
 		//gameState: buildGameState,
 		//messagesList: buildMessagesList
 	}
