@@ -18,7 +18,7 @@ namespace RecipeApi.Controllers
 
         public LikesController(IRepository<Like> data)
         {
-            this.data = data;
+            this.data = data as LikeRepository;
         }
 
         public LikesController()
@@ -26,30 +26,41 @@ namespace RecipeApi.Controllers
             this.data = new LikeRepository(new RecipeContext());
         }
 
-        // GET api/likes
-        public IEnumerable<LikesModel> Get()
+        // GET api/userlikes
+        [HttpGet]
+        [ActionName("userlikes")]
+        public IEnumerable<LikesModel> GetLikesFromUser(string sessionKey)
         {
-            var likes = this.data.All();
+            var userRep = new UserRepository(new RecipeContext());
+            var userId = userRep.LoginUser(sessionKey);
+            var likes = (this.data as LikeRepository).GetLikesFromUser(userId);
             var convertLikes = ConvertLikes(likes);
             return convertLikes;
         }
 
-        // GET api/likes/5
-        public LikesModel Get(int id)
+        // GET api/recipelikes
+        [HttpGet]
+        [ActionName("recipelikes")]
+        public IEnumerable<LikesModel> GetLikesForRecipe(string sessionKey, int recipeId)
         {
-            var like = this.data.Get(id);
-            var convertLike = ConvertLike(like);
-            return convertLike;
+            var likes = (this.data as LikeRepository).GetLikesForRecipe(recipeId);
+            var convertLikes = ConvertLikes(likes);
+            return convertLikes;
         }
 
-        // POST api/likes
-        public HttpResponseMessage Post([FromBody]Like model)
+        // POST api/addlike
+        [HttpGet]
+        [ActionName("addlike")]
+        public HttpResponseMessage Post(string sessionKey, int recipeId, [FromBody]Like like)
         {
             //Like like = DeserializeFromModel(model);
-            this.data.Add(model);
+            var userRep = new UserRepository(new RecipeContext());
+            var userId = userRep.LoginUser(sessionKey);
+            
+            (this.data as LikeRepository).AddLike(userId, recipeId, like);
 
             var message = this.Request.CreateResponse(HttpStatusCode.Created);
-            message.Headers.Location = new Uri(this.Request.RequestUri + model.LikeId.ToString(CultureInfo.InvariantCulture));
+            message.Headers.Location = new Uri(this.Request.RequestUri + like.LikeId.ToString(CultureInfo.InvariantCulture));
             return message;
         }
 
