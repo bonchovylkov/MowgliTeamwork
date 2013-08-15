@@ -87,7 +87,7 @@ namespace RecipeRepository
                 var user = context.Users.FirstOrDefault(u => u.UserName.ToLower() == usernameToLower && u.Password == authCode);
                 if (user == null)
                 {
-                    throw new ArgumentException("Invalid user authentication", "INV_USR_AUTH");
+                    throw new ArgumentException("Invalid user authentication", ("INV_USR_AUTH " + authCode)) ;
                 }
 
                 var sessionKey = GenerateSessionKey((int)user.UserId);
@@ -106,7 +106,7 @@ namespace RecipeRepository
                 var user = context.Users.FirstOrDefault(u => u.SessionKey == sessionKey);
                 if (user == null)
                 {
-                    throw new ArgumentException("Invalid user authentication", "INV_USR_AUTH");
+                    throw new ArgumentException("Invalid user authentication", ("INV_USR_AUTH" + sessionKey));
                 }
                 return (int)user.UserId;
             }
@@ -121,7 +121,7 @@ namespace RecipeRepository
                 var user = context.Users.FirstOrDefault(u => u.SessionKey == sessionKey);
                 if (user == null)
                 {
-                    throw new ArgumentException("Invalid user authentication", "INV_USR_AUTH");
+                    throw new ArgumentException("Invalid user authentication", "INV_USR_AUTH when loggin out");
                 }
 
                 user.SessionKey = null;

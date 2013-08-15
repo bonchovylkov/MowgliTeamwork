@@ -53,7 +53,7 @@ namespace RecipeApi.Controllers
             }
             catch (Exception ex)
             {
-                var response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+                var response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message + sessionKey);
                 return response;
             }
         }
