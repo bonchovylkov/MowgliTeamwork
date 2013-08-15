@@ -41,6 +41,23 @@ namespace RecipeRepositories
             }
         }
 
+        public IQueryable<Comment> GetCommentsFromUser(int userId)
+        {
+            var context = new RecipeContext();
+            var user = context.Users.FirstOrDefault(u => u.UserId == userId);
+            var comments = (from c in user.Comments
+                           select c).AsQueryable<Comment>();
+            return comments;
+        }
+
+        public IQueryable<Comment> GetCommentsFromRecipe(int recipeId)
+        {
+            var context = new RecipeContext();
+            var recipe = context.Recipies.FirstOrDefault(u => u.RecipeId == recipeId);
+            var comments = (from c in recipe.Comments
+                            select c).AsQueryable<Comment>();
+            return comments;
+        }
 
 
         public Comment Add(Comment item)
