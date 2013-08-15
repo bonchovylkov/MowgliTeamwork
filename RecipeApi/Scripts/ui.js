@@ -31,8 +31,13 @@
 				nickname +
 		'!</span>' +
 		'<button id="btn-logout">Logout</button><br/>' +
+        '<h1>User Recipies</h1>' +
+		'<div id="userReps">' +
+
+		'</div>' +
+        '<h1>ALL Recipies</h1>' +
 		'<div id="allRecipies">' +
-			'<h1>ALL Recipies<h1>' +
+			
 		'</div>' +
 		'<div id="add-recipe-container">' +
 			'<h2>Add Recipe</h2>' +
@@ -47,27 +52,27 @@
 		return html;
 	}
 
-	//function buildOpenGamesList(games) {
-	//	var list = '<ul class="game-list open-games">';
-	//	for (var i = 0; i < games.length; i++) {
-	//		var game = games[i];
-	//		list +=
-	//			'<li data-game-id="' + game.id + '">' +
-	//				'<a href="#" >' +
-	//					$("<div />").html(game.title).text() +
-	//				'</a>' +
-	//				'<span> by ' +
-	//					game.creatorNickname +
-	//				'</span>' +
-	//			'</li>';
-	//	}
-	//	list += "</ul>";
-	//	return list;
-	//}
+	function buildloadAllReps(Recipe) {
+		var list = '<ul class="game-list open-Recipe">';
+		for (var i = 0; i < Recipe.length; i++) {
+			var rep = Recipe[i];
+			list +=
+				'<li data-game-id="' + rep.RecipeId + '">  Name:' +
+					'<a href="#" >' +
+						$("<div />").html(rep.RecipeName).text() +
+					'</a>' +
+					'<span> Made from' +
+						rep.Products +
+					'</span>' +
+				'</li>';
+		}
+		list += "</ul>";
+		return list;
+	}
 
-	//function buildActiveGamesList(games) {
-	//	var gamesList = Array.prototype.slice.call(games, 0);
-	//	gamesList.sort(function (g1, g2) {
+	//function buildActiveRecipeList(Recipe) {
+	//	var RecipeList = Array.prototype.slice.call(Recipe, 0);
+	//	RecipeList.sort(function (g1, g2) {
 	//		if (g1.status == g2.status) {
 	//			return g1.title > g2.title;
 	//		}
@@ -79,9 +84,9 @@
 	//		return 1;
 	//	});
 
-	//	var list = '<ul class="game-list active-games">';
-	//	for (var i = 0; i < gamesList.length; i++) {
-	//		var game = gamesList[i];
+	//	var list = '<ul class="game-list active-Recipe">';
+	//	for (var i = 0; i < RecipeList.length; i++) {
+	//		var game = RecipeList[i];
 	//		list +=
 	//			'<li class="game-status-' + game.status + '" data-game-id="' + game.id + '" data-creator="' + game.creatorNickname + '">' +
 	//				'<a href="#" class="btn-active-game">' +
@@ -123,21 +128,21 @@
 	//	return tableHtml;
 	//}
 
-	//function buildGameState(gameState) {
+	//function buildRecipetate(Recipetate) {
 	//	var html =
-	//		'<div id="game-state" data-game-id="' + gameState.id + '">' +
-	//			'<h2>' + gameState.title + '</h2>' +
+	//		'<div id="game-state" data-game-id="' + Recipetate.id + '">' +
+	//			'<h2>' + Recipetate.title + '</h2>' +
 	//			'<div id="blue-guesses" class="guess-holder">' +
 	//				'<h3>' +
-	//					gameState.blue + '\'s gueesses' +
+	//					Recipetate.blue + '\'s gueesses' +
 	//				'</h3>' +
-	//				buildGuessTable(gameState.blueGuesses) +
+	//				buildGuessTable(Recipetate.blueGuesses) +
 	//			'</div>' +
 	//			'<div id="red-guesses" class="guess-holder">' +
 	//				'<h3>' +
-	//					gameState.red + '\'s gueesses' +
+	//					Recipetate.red + '\'s gueesses' +
 	//				'</h3>' +
-	//				buildGuessTable(gameState.redGuesses) +
+	//				buildGuessTable(Recipetate.redGuesses) +
 	//			'</div>' +
 	//	'</div>';
 	//	return html;
@@ -162,10 +167,10 @@
 
 	return {
 		recipeUI: buildrecipeUI,
-		//openGamesList: buildOpenGamesList,
+		loadAllReps: buildloadAllReps,
 		loginForm: buildLoginForm
-		//activeGamesList: buildActiveGamesList,
-		//gameState: buildGameState,
+		//activeRecipeList: buildActiveRecipeList,
+		//Recipetate: buildRecipetate,
 		//messagesList: buildMessagesList
 	}
 

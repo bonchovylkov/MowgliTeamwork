@@ -31,7 +31,7 @@ var controllers = (function () {
 				ui.recipeUI(this.persister.nickname());
 			$(selector).html(recipeUIHtml);
 
-			//this.updateUI(selector);
+			this.updateUI(selector);
 
 			//updateTimer = setInterval(function () {
 			//	self.updateUI(selector);
@@ -174,22 +174,22 @@ var controllers = (function () {
 		//	wrapper.on("click", ".active-games .in-progress", function () {
 		//		self.loadGame(selector, $(this).parent().data("game-id"));
 		//	});
-		//},
-		//updateUI: function (selector) {
-		//	this.persister.game.open(function (games) {
-		//		var list = ui.openGamesList(games);
-		//		$(selector + " #open-games")
-		//			.html(list);
-		//	});
-		//	this.persister.game.myActive(function (games) {
-		//		var list = ui.activeGamesList(games);
-		//		$(selector + " #active-games")
-		//			.html(list);
-		//	});
-		//	this.persister.message.all(function (msg) {
-		//		var msgList = ui.messagesList(msg);
-		//		$(selector + " #messages-holder").html(msgList);
-		//	});
+		},
+		updateUI: function (selector) {
+			this.persister.recipe.getAll(function (games) {
+				var list = ui.loadAllReps(games);
+			    $(selector + " #allRecipies")
+					.html(list);
+			});
+			//this.persister.game.myActive(function (games) {
+			//	var list = ui.activeGamesList(games);
+			//	$(selector + " #active-games")
+			//		.html(list);
+			//});
+			//this.persister.message.all(function (msg) {
+			//	var msgList = ui.messagesList(msg);
+			//	$(selector + " #messages-holder").html(msgList);
+			//});
 		}
 	});
 	return {

@@ -52,7 +52,7 @@
 	//	return html;
 	//}
 
-	//function buildOpenGamesList(games) {
+	//function buildloadAllReps(games) {
 	//	var list = '<ul class="game-list open-games">';
 	//	for (var i = 0; i < games.length; i++) {
 	//		var game = games[i];
@@ -167,7 +167,7 @@
 
 	return {
 		//recipeUI: buildrecipeUI
-		//openGamesList: buildOpenGamesList,
+		//loadAllReps: buildloadAllReps,
 		loginForm: buildLoginForm
 		//activeGamesList: buildActiveGamesList,
 		//gameState: buildGameState,

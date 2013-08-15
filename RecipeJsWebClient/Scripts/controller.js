@@ -161,7 +161,7 @@ var controllers = (function () {
 		//},
 		//updateUI: function (selector) {
 		//	this.persister.game.open(function (games) {
-		//		var list = ui.openGamesList(games);
+		//		var list = ui.loadAllReps(games);
 		//		$(selector + " #open-games")
 		//			.html(list);
 		//	});

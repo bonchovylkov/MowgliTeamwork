@@ -94,15 +94,11 @@ var persisters = (function () {
 				    success(data);
 				}, error);
 	    },
-	    register: function (user, success, error) {
-	        var url = this.rootUrl + "register";
-	        var userData = {
-	            UserName: user.username,
-	            Password: user.password
-	        };
-	        httpRequester.postJSON(url, userData,
+	    getAll: function (success, error) {
+	        var url = this.rootUrl + "getall/" + sessionKey;
+	       
+	        httpRequester.getJSON(url,
 				function (data) {
-				    saveUserData(data);
 				    success(data);
 				}, error);
 	    },
