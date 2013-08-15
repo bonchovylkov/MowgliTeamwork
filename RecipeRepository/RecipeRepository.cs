@@ -12,23 +12,56 @@ namespace RecipeRepositories
 {
     public class RecipeRepository : IRepository<Recipe>
     {
-        private RecipeContext context;
+        
 
         public RecipeRepository(RecipeContext context)
         {
-            this.context = context;
+            
         }
+
+        public ICollection<Recipe> GetRecipiesByUser(int userId)
+        {
+            var context = new RecipeContext();
+            var user = context.Users.FirstOrDefault(u => u.UserId == userId);
+            if (user!=null)
+            {
+                return user.Recipes;
+            }
+            else
+            {
+                throw new ArgumentException("The user is null aperantly!");
+            }
+
+        }
+
+        public IQueryable<Recipe> GetAllRecipies()
+        {
+            var context = new RecipeContext();
+            return context.Recipies;
+        }
+
+        public Recipe AddRecipe(int userId, Recipe recipe)
+        {
+            var context = new RecipeContext();
+            var user = context.Users.FirstOrDefault(u => u.UserId == userId);
+            if (user!=null)
+            {
+                recipe.User = user;
+                context.Recipies.Add(recipe);
+                context.SaveChanges();
+                return recipe;
+            }
+            else
+            {
+                throw new ArgumentException("The user is null aperantly!");
+            }
+        }
+
+
 
         public Recipe Add(Recipe item)
         {
-            using (context)
-            {
-                
-                context.Recipies.Add(item);
-                context.SaveChanges();
-            }
-
-            return null;
+            throw new NotImplementedException();
         }
 
         public Recipe Update(int id, Recipe item)
