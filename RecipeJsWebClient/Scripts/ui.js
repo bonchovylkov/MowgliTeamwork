@@ -52,7 +52,7 @@
 	//	return html;
 	//}
 
-	//function buildOpenGamesList(games) {
+	//function buildrecipiList(games) {
 	//	var list = '<ul class="game-list open-games">';
 	//	for (var i = 0; i < games.length; i++) {
 	//		var game = games[i];
@@ -70,7 +70,7 @@
 	//	return list;
 	//}
 
-	//function buildActiveGamesList(games) {
+	//function buildrecipiesByUser(games) {
 	//	var gamesList = Array.prototype.slice.call(games, 0);
 	//	gamesList.sort(function (g1, g2) {
 	//		if (g1.status == g2.status) {
@@ -167,9 +167,9 @@
 
 	return {
 		//recipeUI: buildrecipeUI
-		//openGamesList: buildOpenGamesList,
+		//recipiList: buildrecipiList,
 		loginForm: buildLoginForm
-		//activeGamesList: buildActiveGamesList,
+		//recipiesByUser: buildrecipiesByUser,
 		//gameState: buildGameState,
 		//messagesList: buildMessagesList
 	}

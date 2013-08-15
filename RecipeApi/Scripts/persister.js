@@ -94,27 +94,19 @@ var persisters = (function () {
 				    success(data);
 				}, error);
 	    },
-	    register: function (user, success, error) {
-	        var url = this.rootUrl + "register";
-	        var userData = {
-	            UserName: user.username,
-	            Password: user.password
-	        };
-	        httpRequester.postJSON(url, userData,
+	    getAll: function (success, error) {
+	        var url = this.rootUrl + "getall/"+sessionKey;
+	       
+	        httpRequester.getJSON(url,
 				function (data) {
-				    saveUserData(data);
 				    success(data);
 				}, error);
 	    },
-	    logout: function (success, error) {
-	        var url = this.rootUrl + "logout/" + sessionKey;
+	    getByUser: function (success, error) {
+	        var url = this.rootUrl + "getbyuser/" + sessionKey;
 	        httpRequester.getJSON(url, function (data) {
-	            clearUserData();
 	            success(data);
-
-	        },
-            clearUserData(),
-            error)
+	        },error)
 	    },
 	    scores: function (success, error) {
 	    }
