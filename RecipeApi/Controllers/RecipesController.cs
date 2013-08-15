@@ -45,7 +45,6 @@ namespace RecipeApi.Controllers
 
         // POST api/recipes
         [HttpPost]
-        [EnableCors("*", "*", "*")]
         public void Post([FromBody]RecipiesModelFull model)
         {
             var recipe = DeserializeRecipeFromModelFull(model);
