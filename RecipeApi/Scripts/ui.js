@@ -26,31 +26,25 @@
 		return html;
 	}
 
-	//function buildGameUI(nickname) {
-	//	var html = '<span id="user-nickname">' +
-	//			nickname +
-	//	'</span>' +
-	//	'<button id="btn-logout">Logout</button><br/>' +
-	//	'<div id="create-game-holder">' +
-	//		'Title: <input type="text" id="tb-create-title" />' +
-	//		'Password: <input type="text" id="tb-create-pass" />' +
-	//		'Number: <input type="text" id="tb-create-number" />' +
-	//		'<button id="btn-create-game">Create</button>' +
-	//	'</div>' +
-	//	'<div id="open-games-container">' +
-	//		'<h2>Open</h2>' +
-	//		'<div id="open-games"></div>' +
-	//	'</div>' +
-	//	'<div id="active-games-container">' +
-	//		'<h2>Active</h2>' +
-	//		'<div id="active-games"></div>' +
-	//	'</div>' +
-	//	'<div id="game-holder">' +
-	//	'</div>' +
-	//	'<div id="messages-holder">' +
-	//	'</div>';
-	//	return html;
-	//}
+	function buildrecipeUI(nickname) {
+	    var html = '<span id="user-nickname">Hello ' +
+				nickname +
+		'!</span>' +
+		'<button id="btn-logout">Logout</button><br/>' +
+		'<div id="allRecipies">' +
+			'<h1>ALL Recipies<h1>' +
+		'</div>' +
+		'<div id="add-recipe">' +
+			'<h2>Add Recipe</h2>' +
+            '<label for="RecipeName">Recipe Name: </label>' +
+            '<input type="text" id="RecipeName"><br />' +
+            '<label for="products">Recipe Products: </label>' +
+            '<input type="text" id="products"><br />' +
+            '<label for="pictures">Recipe Picture: </label>' +
+            '<input name="image" type="file" id="pictures"><br />' +
+		'</div>';
+		return html;
+	}
 
 	//function buildOpenGamesList(games) {
 	//	var list = '<ul class="game-list open-games">';
@@ -166,7 +160,7 @@
 	//}
 
 	return {
-		//gameUI: buildGameUI
+		recipeUI: buildrecipeUI,
 		//openGamesList: buildOpenGamesList,
 		loginForm: buildLoginForm
 		//activeGamesList: buildActiveGamesList,

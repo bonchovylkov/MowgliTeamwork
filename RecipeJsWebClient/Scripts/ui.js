@@ -26,7 +26,7 @@
 		return html;
 	}
 
-	//function buildGameUI(nickname) {
+	//function buildrecipeUI(nickname) {
 	//	var html = '<span id="user-nickname">' +
 	//			nickname +
 	//	'</span>' +
@@ -166,7 +166,7 @@
 	//}
 
 	return {
-		//gameUI: buildGameUI
+		//recipeUI: buildrecipeUI
 		//openGamesList: buildOpenGamesList,
 		loginForm: buildLoginForm
 		//activeGamesList: buildActiveGamesList,

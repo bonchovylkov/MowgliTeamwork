@@ -14,7 +14,7 @@ var controllers = (function () {
 		},
 		loadUI: function (selector) {
 			if (this.persister.isUserLoggedIn()) {
-				this.loadGameUI(selector);
+				this.loadMainU(selector);
 			}
 			else {
 				this.loadLoginFormUI(selector);
@@ -25,11 +25,11 @@ var controllers = (function () {
 			var loginFormHtml = ui.loginForm()
 			$(selector).html(loginFormHtml);
 		},
-		loadGameUI: function (selector) {
+		loadMainU: function (selector) {
 			var self = this;
-			var gameUIHtml =
-				ui.gameUI(this.persister.nickname());
-			$(selector).html(gameUIHtml);
+			var recipeUIHtml =
+				ui.recipeUI(this.persister.nickname());
+			$(selector).html(recipeUIHtml);
 
 			this.updateUI(selector);
 
@@ -67,7 +67,7 @@ var controllers = (function () {
 				}
 
 				self.persister.user.login(user, function () {
-					self.loadGameUI(selector);
+					self.loadMainU(selector);
 				}, function (err) {
 					wrapper.find("#error-messages").text(err.responseJSON.Message);
 				});
@@ -79,7 +79,7 @@ var controllers = (function () {
 					password: $(selector + " #tb-register-password").val()
 				}
 				self.persister.user.register(user, function () {
-					self.loadGameUI(selector);
+					self.loadMainU(selector);
 				}, function (err) {
 					wrapper.find("#error-messages").text(err.responseJSON.Message);
 				});
