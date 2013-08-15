@@ -34,7 +34,7 @@
 		'<div id="allRecipies">' +
 			'<h1>ALL Recipies<h1>' +
 		'</div>' +
-		'<div id="add-recipe">' +
+		'<div id="add-recipe-container">' +
 			'<h2>Add Recipe</h2>' +
             '<label for="RecipeName">Recipe Name: </label>' +
             '<input type="text" id="RecipeName"><br />' +
@@ -42,6 +42,7 @@
             '<input type="text" id="products"><br />' +
             '<label for="pictures">Recipe Picture: </label>' +
             '<input name="image" type="file" id="pictures"><br />' +
+            '<button id="add-recipe" class="button">Add Recipe</button>' +
 		'</div>';
 		return html;
 	}

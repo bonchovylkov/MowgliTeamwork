@@ -21,6 +21,7 @@ var persisters = (function () {
 		init: function (rootUrl) {
 			this.rootUrl = rootUrl;
 			this.user = new UserPersister(this.rootUrl);
+			this.recipe = new RecipePersister(this.rootUrl);
 			//this.game = new GamePersister(this.rootUrl);
 			//this.message = new MessagesPersister(this.rootUrl);
 		},
@@ -68,11 +69,57 @@ var persisters = (function () {
 				clearUserData();
 				success(data);
 
-			}, error)
+			}, 
+            clearUserData(),
+            error)
 		},
 		scores: function (success, error) {
 		}
 	});
+
+	var RecipePersister = Class.create({
+	    init: function (rootUrl) {
+	        //...api/user/
+	        this.rootUrl = rootUrl + "recipes/";
+	    },
+	    addRecipe: function (recipe, success, error) {
+	        var url = this.rootUrl + "addrecipe/" + sessionKey;
+	        //var userData = {
+	        //    Username: user.username,
+	        //    Password: user.password
+	        //};
+
+	        httpRequester.postJSON(url, recipe,
+				function (data) {
+				    success(data);
+				}, error);
+	    },
+	    register: function (user, success, error) {
+	        var url = this.rootUrl + "register";
+	        var userData = {
+	            UserName: user.username,
+	            Password: user.password
+	        };
+	        httpRequester.postJSON(url, userData,
+				function (data) {
+				    saveUserData(data);
+				    success(data);
+				}, error);
+	    },
+	    logout: function (success, error) {
+	        var url = this.rootUrl + "logout/" + sessionKey;
+	        httpRequester.getJSON(url, function (data) {
+	            clearUserData();
+	            success(data);
+
+	        },
+            clearUserData(),
+            error)
+	    },
+	    scores: function (success, error) {
+	    }
+	});
+
 	//var GamePersister = Class.create({
 	//	init: function (url) {
 	//		this.rootUrl = url + "game/";

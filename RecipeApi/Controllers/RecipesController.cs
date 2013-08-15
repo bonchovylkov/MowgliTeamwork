@@ -52,14 +52,29 @@ namespace RecipeApi.Controllers
 
         [HttpPost]
         [ActionName("addrecipe")]
-        public HttpResponseMessage AddRecipe(string sessionKey, [FromBody] Recipe recipe)
+        public HttpResponseMessage AddRecipe(string sessionKey, [FromBody] RecepiesModel recipeModel)
         {
             var UserRep = new UserRepository(new RecipeContext());
             var userId = UserRep.LoginUser(sessionKey);
+            var recipe = ConvertFromModelToDbRecipe(recipeModel);
             var recipeToReturn = (this.recipeRepository as RecipeRepositoryyy).AddRecipe(userId, recipe);
-            var message = this.Request.CreateResponse(HttpStatusCode.Created, recipeToReturn);
+            RecipiesModelFull rep = ConverRecipeToRecipeModelFull(recipeToReturn);
+            var message = this.Request.CreateResponse(HttpStatusCode.Created, rep);
             message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
             return message;
+        }
+
+        
+
+        private Recipe ConvertFromModelToDbRecipe(RecepiesModel recipeModel)
+        {
+            Recipe rep = new Recipe()
+            {
+                RecipeName = recipeModel.RecipeName,
+                Products = recipeModel.Products,
+               // PictureLink = recipeModel.PictureLink
+            };
+            return rep;
         }
        
 
@@ -109,13 +124,22 @@ namespace RecipeApi.Controllers
             recipeModel.PictureLink = recipe.PictureLink;
             recipeModel.Products = recipe.Products;
             recipeModel.FromUser = recipe.User.UserName;
-            recipeModel.Steps = (from s in recipe.Steps
-                                 select new StepModel
-                                 {
-                                     StepId = s.StepId,
-                                     StepText = s.StepText,
-                                     ForRecipe = s.Recipe.RecipeName,
-                                 }).AsEnumerable();
+            if (recipe.Steps != null)
+            {
+                recipeModel.Steps = (from s in recipe.Steps
+                                     select new StepModel
+                                     {
+                                         StepId = s.StepId,
+                                         StepText = s.StepText,
+                                         ForRecipe = s.Recipe.RecipeName,
+                                     }).AsEnumerable();
+            }
+            recipeModel.User = new UserModel()
+            {
+                UserName = recipe.User.UserName,
+                SessionKey = recipe.User.SessionKey
+            };
+            
             return recipeModel;
         }
 

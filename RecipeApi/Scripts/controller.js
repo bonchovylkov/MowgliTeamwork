@@ -90,8 +90,23 @@ var controllers = (function () {
 					self.loadLoginFormUI(selector);
 					alert("sucsses");
 				}, function (err) {
-				    alert(JSON.stringify(err))
+				    self.loadLoginFormUI(selector);
 				});
+			});
+
+			wrapper.on("click", "#add-recipe", function () {
+			    var recipe = {
+			        RecipeName: $(selector).find("#RecipeName").val(),
+			        Products: $(selector).find("#products").val()
+			    }
+
+			    self.persister.recipe.addRecipe(recipe, function (data) {
+			        //ui.AddRecipe(data);
+			        //self.loadLoginFormUI(selector);
+			        alert(JSON.stringify(data));    
+			    }, function (err) {
+			        alert(JSON.stringify(err));
+			    });
 			});
 
 		//	wrapper.on("click", "#open-games-container a", function () {
