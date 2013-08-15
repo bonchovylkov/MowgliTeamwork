@@ -9,7 +9,6 @@ using RecipeApi.Models;
 using RecipeData;
 using RecipeModels;
 using System.IO;
-using System.Web.Http.Cors;
 
 namespace RecipeApi.Controllers
 {
@@ -44,11 +43,9 @@ namespace RecipeApi.Controllers
         }
 
         // POST api/recipes
-        [HttpPost]
-        public void Post([FromBody]RecipiesModelFull model)
+        public void Post([FromBody]Recipe model)
         {
-            var recipe = DeserializeRecipeFromModelFull(model);
-            this.recipeRepository.Add(recipe);
+            var recipe = this.recipeRepository.Add(model);
         }
 
         // PUT api/recipes/5
@@ -77,24 +74,20 @@ namespace RecipeApi.Controllers
 
         private Recipe DeserializeRecipeFromModelFull(RecipiesModelFull model)
         {
+
             Recipe recipe = new Recipe
             {
                 RecipeId = model.RecipeId,
                 RecipeName = model.RecipeName,
                 Products = model.Products,
                 PictureLink = model.PictureLink,
-            };
-
-            if (model.Steps != null)
-            {
-                recipe.Steps = (ICollection<Step>)
+                Steps = (ICollection<Step>)
                     (from s in model.Steps
-                     select new Step
-                     {
-                         StepId = s.StepId,
-                         StepText = s.StepText,
-                     });
-            }
+                    select new Step
+                    {
+
+                    }),
+            };
 
             return recipe;
         }

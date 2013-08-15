@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -10,8 +11,6 @@ namespace RecipeApi
     {
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{sessionKey}/{id}",
@@ -29,8 +28,7 @@ namespace RecipeApi
             // For more information, refer to: http://www.asp.net/web-api
 
             config.EnableSystemDiagnosticsTracing();
-            //config.EnableCors();
-            
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
         }
     }
 }
