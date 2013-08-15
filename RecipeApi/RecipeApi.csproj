@@ -178,7 +178,6 @@
     <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\RecipesController.cs" />
     <Compile Include="Controllers\StepsController.cs" />
-    <Compile Include="Controllers\UploadTestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
