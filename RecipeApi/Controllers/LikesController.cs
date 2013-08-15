@@ -49,7 +49,7 @@ namespace RecipeApi.Controllers
         }
 
         // POST api/addlike
-        [HttpGet]
+        [HttpPost]
         [ActionName("addlike")]
         public HttpResponseMessage Post(string sessionKey, int recipeId, [FromBody]Like like)
         {

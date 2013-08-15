@@ -47,7 +47,7 @@ namespace RecipeApi.Controllers
         }
 
         // POST api/steps
-        [HttpGet]
+        [HttpPost]
         [ActionName("addStep")]
         public HttpResponseMessage Post(string sessionKey, int recipeId, [FromBody]Step step)
         {
