@@ -1,6 +1,7 @@
 ﻿using RecipeApi.Models;
 using RecipeData;
 using RecipeModels;
+using RecipeRepositories;
 using RecipeRepository;
 using System;
 using System.Collections.Generic;
@@ -18,38 +19,48 @@ namespace RecipeApi.Controllers
 
         public CommentsController(IRepository<Comment> data)
         {
-            this.data = data;
+            this.data = data as CommentRepository;
         }
 
         public CommentsController()
         {
-            this.data = new DbRepositoryEF<Comment>(new RecipeContext());
+            this.data = new CommentRepository(new RecipeContext());
         }
 
         // GET api/comments
-        public IEnumerable<CommentsModel> Get()
+        [HttpGet]
+        [ActionName("usercomments")]
+        public IEnumerable<CommentsModel> GetCommentsFromUser(string sessionKey)
         {
-            var comments = this.data.All();
+            var UserRep =new UserRepository(new RecipeContext());
+            var userId = UserRep.LoginUser(sessionKey);
+            var comments = (this.data as CommentRepository).GetCommentsFromUser(userId);
             var convertComments = ConvertComments(comments);
             return convertComments;
         }
 
 
         // GET api/comments/5
-        public CommentsModel Get(int id)
+        [HttpGet]
+        [ActionName("recipecomments")]
+        public IEnumerable<CommentsModel> GetCommentsFromRecipe(string sessionKey,int recipeId)
         {
-            var comment = this.data.Get(id);
-            var convertComment = ConvertComment(comment);
+            var comments = (this.data as CommentRepository).GetCommentsFromRecipe(recipeId);
+            var convertComment = ConvertComments(comments);
             return convertComment;
         }
 
-        // POST api/comments
-        public HttpResponseMessage Post([FromBody]Comment model)
+        // POST api/comments\
+        [HttpPost]
+        [ActionName("add")]
+        public HttpResponseMessage AddComment(int recipeId,string sessionKey,[FromBody]Comment comment)
         {
-            this.data.Add(model);
+            var UserRep =new UserRepository(new RecipeContext());
+            var userId = UserRep.LoginUser(sessionKey);
+            (this.data as CommentRepository).AddComment(userId,recipeId, comment);
 
             var message = this.Request.CreateResponse(HttpStatusCode.Created);
-            message.Headers.Location = new Uri(this.Request.RequestUri + model.CommentId.ToString(CultureInfo.InvariantCulture));
+            message.Headers.Location = new Uri(this.Request.RequestUri + comment.CommentId.ToString(CultureInfo.InvariantCulture));
             return message;
         }
 
