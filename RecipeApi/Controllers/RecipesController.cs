@@ -41,21 +41,13 @@ namespace RecipeApi.Controllers
 
         [HttpGet]
         [ActionName("getbyuser")]
-        public HttpResponseMessage GetRecipiesByUser(string sessionKey)
+        public IEnumerable<RecepiesModel> GetRecipiesByUser(string sessionKey)
         {
-            try{
             var UserRep = new UserRepository(new RecipeContext());
             var userId = UserRep.LoginUser(sessionKey);
             var recipiesByUser = (this.recipeRepository as RecipeRepositoryyy).GetRecipiesByUser(userId);
             var allRecipesModel = ConvertRecipesToRecipesModel(recipiesByUser);
-            var message = this.Request.CreateResponse(HttpStatusCode.Created, allRecipesModel);
-            return message;
-            }
-            catch (Exception ex)
-            {
-                var response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
-                return response;
-            }
+            return allRecipesModel.AsEnumerable();
         }
 
         [HttpPost]

@@ -161,12 +161,12 @@ var controllers = (function () {
 		//},
 		//updateUI: function (selector) {
 		//	this.persister.game.open(function (games) {
-		//		var list = ui.recipiList(games);
+		//		var list = ui.openGamesList(games);
 		//		$(selector + " #open-games")
 		//			.html(list);
 		//	});
 		//	this.persister.game.myActive(function (games) {
-		//		var list = ui.recipiesByUser(games);
+		//		var list = ui.activeGamesList(games);
 		//		$(selector + " #active-games")
 		//			.html(list);
 		//	});
