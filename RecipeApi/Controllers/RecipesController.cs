@@ -61,31 +61,7 @@ namespace RecipeApi.Controllers
             message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
             return message;
         }
-        //// GET api/recipes/5
-        //public RecipiesModelFull Get(int id)
-        //{
-        //    var recipe = this.recipeRepository.Get(id);
-        //    var recipeModel = ConverRecipeToRecipeModelFull(recipe);
-        //    return recipeModel;
-        //}
-
-        //// POST api/recipes
-        //[HttpPost]
-        //public void Post([FromBody]RecipiesModelFull model)
-        //{
-        //    var recipe = DeserializeRecipeFromModelFull(model);
-        //    this.recipeRepository.Add(recipe);
-        //}
-
-        //// PUT api/recipes/5
-        //public void Put(int id, [FromBody]RecipiesModelFull value)
-        //{
-        //}
-
-        //// DELETE api/recipes/5
-        //public void Delete(int id)
-        //{
-        //}
+       
 
         private IQueryable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
         {
