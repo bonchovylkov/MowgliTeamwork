@@ -76,7 +76,6 @@ var controllers = (function () {
 			wrapper.on("click", "#btn-register", function () {
 				var user = {
 					username: $(selector).find("#tb-register-username").val(),
-					nickname: $(selector).find("#tb-register-nickname").val(),
 					password: $(selector + " #tb-register-password").val()
 				}
 				self.persister.user.register(user, function () {
@@ -94,87 +93,87 @@ var controllers = (function () {
 				});
 			});
 
-			wrapper.on("click", "#open-games-container a", function () {
-				$("#game-join-inputs").remove();
-				var html =
-					'<div id="game-join-inputs">' +
-						'Number: <input type="text" id="tb-game-number"/><br/>' +
-						'Password: <input type="text" id="tb-game-pass"/><br/>' +
-						'<button id="btn-join-game">join</button>' +
-					'</div>';
-				$(this).after(html);
-			});
-			wrapper.on("click", "#btn-join-game", function () {
-				var game = {
-					number: $("#tb-game-number").val(),
-					gameId: $(this).parents("li").first().data("game-id")
-				};
+		//	wrapper.on("click", "#open-games-container a", function () {
+		//		$("#game-join-inputs").remove();
+		//		var html =
+		//			'<div id="game-join-inputs">' +
+		//				'Number: <input type="text" id="tb-game-number"/><br/>' +
+		//				'Password: <input type="text" id="tb-game-pass"/><br/>' +
+		//				'<button id="btn-join-game">join</button>' +
+		//			'</div>';
+		//		$(this).after(html);
+		//	});
+		//	wrapper.on("click", "#btn-join-game", function () {
+		//		var game = {
+		//			number: $("#tb-game-number").val(),
+		//			gameId: $(this).parents("li").first().data("game-id")
+		//		};
 
-				var password = $("#tb-game-pass").val();
+		//		var password = $("#tb-game-pass").val();
 
-				if (password) {
-					game.password = password;
-				}
-				self.persister.game.join(game);
-			});
-			wrapper.on("click", "#btn-create-game", function () {
-				var game = {
-					title: $("#tb-create-title").val(),
-					number: $("#tb-create-number").val(),
-				}
-				var password = $("#tb-create-pass").val();
-				if (password) {
-					game.password = password;
-				}
-				self.persister.game.create(game);
-			});
+		//		if (password) {
+		//			game.password = password;
+		//		}
+		//		self.persister.game.join(game);
+		//	});
+		//	wrapper.on("click", "#btn-create-game", function () {
+		//		var game = {
+		//			title: $("#tb-create-title").val(),
+		//			number: $("#tb-create-number").val(),
+		//		}
+		//		var password = $("#tb-create-pass").val();
+		//		if (password) {
+		//			game.password = password;
+		//		}
+		//		self.persister.game.create(game);
+		//	});
 
-			wrapper.on("click", "#active-games-container li.game-status-full a.btn-active-game", function () {
-				var gameCreator = $(this).parent().data("creator");
-				var myNickname = self.persister.nickname();
-				if (gameCreator == myNickname) {
-					$("#btn-game-start").remove();
-					var html =
-						'<a href="#" id="btn-game-start">' +
-							'Start' +
-						'</a>';
-					$(this).parent().append(html);
-				}
-			});
+		//	wrapper.on("click", "#active-games-container li.game-status-full a.btn-active-game", function () {
+		//		var gameCreator = $(this).parent().data("creator");
+		//		var myNickname = self.persister.nickname();
+		//		if (gameCreator == myNickname) {
+		//			$("#btn-game-start").remove();
+		//			var html =
+		//				'<a href="#" id="btn-game-start">' +
+		//					'Start' +
+		//				'</a>';
+		//			$(this).parent().append(html);
+		//		}
+		//	});
 
-			wrapper.on("click", "#btn-game-start", function () {
-				var parent = $(this).parent();
+		//	wrapper.on("click", "#btn-game-start", function () {
+		//		var parent = $(this).parent();
 
-				var gameId = parent.data("game-id");
-				self.persister.game.start(gameId, function () {
-					wrapper.find("#game-holder").html("started");
-				},
-				function (err) {
-					alert(JSON.stringify(err));
-				});
+		//		var gameId = parent.data("game-id");
+		//		self.persister.game.start(gameId, function () {
+		//			wrapper.find("#game-holder").html("started");
+		//		},
+		//		function (err) {
+		//			alert(JSON.stringify(err));
+		//		});
 
-				return false;
-			});
+		//		return false;
+		//	});
 			
-			wrapper.on("click", ".active-games .in-progress", function () {
-				self.loadGame(selector, $(this).parent().data("game-id"));
-			});
-		},
-		updateUI: function (selector) {
-			this.persister.game.open(function (games) {
-				var list = ui.openGamesList(games);
-				$(selector + " #open-games")
-					.html(list);
-			});
-			this.persister.game.myActive(function (games) {
-				var list = ui.activeGamesList(games);
-				$(selector + " #active-games")
-					.html(list);
-			});
-			this.persister.message.all(function (msg) {
-				var msgList = ui.messagesList(msg);
-				$(selector + " #messages-holder").html(msgList);
-			});
+		//	wrapper.on("click", ".active-games .in-progress", function () {
+		//		self.loadGame(selector, $(this).parent().data("game-id"));
+		//	});
+		//},
+		//updateUI: function (selector) {
+		//	this.persister.game.open(function (games) {
+		//		var list = ui.openGamesList(games);
+		//		$(selector + " #open-games")
+		//			.html(list);
+		//	});
+		//	this.persister.game.myActive(function (games) {
+		//		var list = ui.activeGamesList(games);
+		//		$(selector + " #active-games")
+		//			.html(list);
+		//	});
+		//	this.persister.message.all(function (msg) {
+		//		var msgList = ui.messagesList(msg);
+		//		$(selector + " #messages-holder").html(msgList);
+		//	});
 		}
 	});
 	return {
