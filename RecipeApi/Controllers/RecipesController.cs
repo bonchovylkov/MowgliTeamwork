@@ -4,11 +4,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using RecipeRepository;
+using RecipeRepositories;
 using RecipeApi.Models;
 using RecipeData;
 using RecipeModels;
 using System.IO;
+<<<<<<< HEAD
+=======
+using System.Web.Http.Cors;
+using RecipeRepository;
+using System.Globalization;
+>>>>>>> d4a19e51e48454061f21bacc9d9d7b58df014e0d
 
 namespace RecipeApi.Controllers
 {
@@ -18,47 +24,80 @@ namespace RecipeApi.Controllers
 
         public RecipesController()
         {
-            this.recipeRepository = new DbRepositoryEF<Recipe>(new RecipeContext());
+            this.recipeRepository = new RecipeRepositoryyy(new RecipeContext());
         }
 
         public RecipesController(IRepository<Recipe> repository)
         {
-            this.recipeRepository = repository;
+            this.recipeRepository = repository as RecipeRepositoryyy;
         }
 
         // GET api/recipes
-        public IEnumerable<RecepiesModel> Get()
+        [HttpGet]
+        [ActionName("getall")]
+        public IEnumerable<RecepiesModel> GetAllRecipies(string sessionKey)
         {
-            var allRecipes = this.recipeRepository.All();
+            var allRecipes = (this.recipeRepository as RecipeRepositoryyy).GetAllRecipies();
             var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes);
             return allRecipesModel.AsEnumerable();
         }
 
-        // GET api/recipes/5
-        public RecipiesModelFull Get(int id)
+        [HttpGet]
+        [ActionName("getbyuser")]
+        public IEnumerable<RecepiesModel> GetRecipiesByUser(string sessionKey)
         {
-            var recipe = this.recipeRepository.Get(id);
-            var recipeModel = ConverRecipeToRecipeModelFull(recipe);
-            return recipeModel;
+            var UserRep = new UserRepository(new RecipeContext());
+            var userId = UserRep.LoginUser(sessionKey);
+            var recipiesByUser = (this.recipeRepository as RecipeRepositoryyy).GetRecipiesByUser(userId);
+            var allRecipesModel = ConvertRecipesToRecipesModel(recipiesByUser);
+            return allRecipesModel.AsEnumerable();
         }
 
+<<<<<<< HEAD
         // POST api/recipes
         public void Post([FromBody]Recipe model)
         {
             var recipe = this.recipeRepository.Add(model);
-        }
-
-        // PUT api/recipes/5
-        public void Put(int id, [FromBody]RecipiesModelFull value)
+=======
+        [HttpPost]
+        [ActionName("addrecipe")]
+        public HttpResponseMessage AddRecipe(string sessionKey,[FromBody] Recipe recipe)
         {
+            var UserRep = new UserRepository(new RecipeContext());
+            var userId = UserRep.LoginUser(sessionKey);
+            var recipeToReturn = (this.recipeRepository as RecipeRepositoryyy).AddRecipe(userId, recipe);
+            var message = this.Request.CreateResponse(HttpStatusCode.Created, recipeToReturn);
+            message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
+            return message;
+>>>>>>> d4a19e51e48454061f21bacc9d9d7b58df014e0d
         }
+        //// GET api/recipes/5
+        //public RecipiesModelFull Get(int id)
+        //{
+        //    var recipe = this.recipeRepository.Get(id);
+        //    var recipeModel = ConverRecipeToRecipeModelFull(recipe);
+        //    return recipeModel;
+        //}
 
-        // DELETE api/recipes/5
-        public void Delete(int id)
-        {
-        }
+        //// POST api/recipes
+        //[HttpPost]
+        //public void Post([FromBody]RecipiesModelFull model)
+        //{
+        //    var recipe = DeserializeRecipeFromModelFull(model);
+        //    this.recipeRepository.Add(recipe);
+        //}
 
-        private IEnumerable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
+        //// PUT api/recipes/5
+        //public void Put(int id, [FromBody]RecipiesModelFull value)
+        //{
+        //}
+
+        //// DELETE api/recipes/5
+        //public void Delete(int id)
+        //{
+        //}
+
+        private IQueryable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
         {
             var recipes = (from r in allRecipes
                            select new RecepiesModel
@@ -68,7 +107,7 @@ namespace RecipeApi.Controllers
                                FromUser = r.User.UserName,
                                PictureLink = r.PictureLink,
                                Products = r.Products
-                           }).AsEnumerable();
+                           });
             return recipes;
         }
 

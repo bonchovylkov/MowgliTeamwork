@@ -10,22 +10,22 @@ using RecipeDropbox;
 
 namespace RecipeRepositories
 {
-    public class RecipeRepository : IRepository<Recipe>
+    public class RecipeRepositoryyy : IRepository<Recipe>
     {
         
 
-        public RecipeRepository(RecipeContext context)
+        public RecipeRepositoryyy(RecipeContext context)
         {
             
         }
 
-        public ICollection<Recipe> GetRecipiesByUser(int userId)
+        public IQueryable<Recipe> GetRecipiesByUser(int userId)
         {
             var context = new RecipeContext();
             var user = context.Users.FirstOrDefault(u => u.UserId == userId);
             if (user!=null)
             {
-                return user.Recipes;
+                return user.Recipes as IQueryable<Recipe>;
             }
             else
             {
