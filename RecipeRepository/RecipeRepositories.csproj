@@ -51,6 +51,7 @@
     <Compile Include="LikeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecipeRepository.cs" />
+    <Compile Include="StepRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

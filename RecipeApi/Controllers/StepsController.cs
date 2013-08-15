@@ -8,43 +8,53 @@ using RecipeRepository;
 using RecipeModels;
 using RecipeData;
 using RecipeApi.Models;
+using RecipeRepositories;
+using System.Globalization;
 
 namespace RecipeApi.Controllers
 {
     public class StepsController : ApiController
     {
-        IRepository<Step> stepRepository;
+        private readonly IRepository<Step> data;
+
+        public StepsController(IRepository<Step> data)
+        {
+            this.data = data as StepRepository;
+        }
 
         public StepsController()
         {
-            this.stepRepository = new DbRepositoryEF<Step>(new RecipeContext());
+            this.data = new StepRepository(new RecipeContext());
         }
 
-        public StepsController(IRepository<Step> repository)
+        // GET api/recipiesteps
+        [HttpGet]
+        [ActionName("recipiesteps")]
+        public IEnumerable<StepModel> GetStepsForRecipe(string sessionKey, int recipeId)
         {
-            this.stepRepository = repository;
-        }
-
-        // GET api/steps
-        public IEnumerable<StepModel> Get()
-        {
-            var allSteps = this.stepRepository.All();
-            var allStepsModel = ConvertStepsToStepsModel(allSteps);
-            return allStepsModel;
+            var steps = (this.data as StepRepository).GetSteps(recipeId);
+            var convertSteps = ConvertStepsToStepsModel(steps);
+            return convertSteps;
         }
 
         // GET api/steps/5
         public StepModel Get(int id)
         {
-            var step = this.stepRepository.Get(id);
+            var step = this.data.Get(id);
             var stepModel = ConvertStepToStepModel(step);
             return stepModel;
         }
 
         // POST api/steps
-        public void Post([FromBody]Step value)
+        [HttpGet]
+        [ActionName("addStep")]
+        public HttpResponseMessage Post(string sessionKey, int recipeId, [FromBody]Step step)
         {
-            this.stepRepository.Add(value);
+            (this.data as StepRepository).AddStep(recipeId, step);
+
+            var message = this.Request.CreateResponse(HttpStatusCode.Created);
+            message.Headers.Location = new Uri(this.Request.RequestUri + step.StepId.ToString(CultureInfo.InvariantCulture));
+            return message;
         }
 
         // PUT api/steps/5
@@ -52,14 +62,14 @@ namespace RecipeApi.Controllers
         {
             if (id == value.StepId)
             {
-                this.stepRepository.Update(id, value);
+                this.data.Update(id, value);
             }
         }
 
         // DELETE api/steps/5
         public void Delete(int id)
         {
-            this.stepRepository.Delete(id);
+            this.data.Delete(id);
         }
 
         private IEnumerable<StepModel> ConvertStepsToStepsModel(IQueryable<Step> allSteps)
