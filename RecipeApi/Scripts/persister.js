@@ -67,6 +67,7 @@ var persisters = (function () {
 			httpRequester.getJSON(url, function (data) {
 				clearUserData();
 				success(data);
+
 			}, error)
 		},
 		scores: function (success, error) {

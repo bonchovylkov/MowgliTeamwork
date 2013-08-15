@@ -31,11 +31,11 @@ var controllers = (function () {
 				ui.recipeUI(this.persister.nickname());
 			$(selector).html(recipeUIHtml);
 
-			this.updateUI(selector);
+			//this.updateUI(selector);
 
-			updateTimer = setInterval(function () {
-				self.updateUI(selector);
-			}, 15000);
+			//updateTimer = setInterval(function () {
+			//	self.updateUI(selector);
+			//}, 15000);
 		},
 		loadGame: function (selector, gameId) {
 			this.persister.game.state(gameId, function (gameState) {
@@ -88,8 +88,9 @@ var controllers = (function () {
 			wrapper.on("click", "#btn-logout", function () {
 				self.persister.user.logout(function () {
 					self.loadLoginFormUI(selector);
-					clearInterval(updateTimer);
+					alert("sucsses");
 				}, function (err) {
+				    alert(JSON.stringify(err))
 				});
 			});
 
