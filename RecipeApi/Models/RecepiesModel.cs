@@ -7,7 +7,7 @@ namespace RecipeApi.Models
 {
     public class RecepiesModel
     {
-        public int RecipeId { get; set; }
+        public int? RecipeId { get; set; }
         public string FromUser { get; set; }
         public string PictureLink { get; set; }
         public string Products { get; set; }

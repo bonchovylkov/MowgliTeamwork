@@ -67,7 +67,6 @@ namespace RecipeRepository
                 dbUser = new User()
                 {
                     UserName = usernameToLower,
-                    
                     Password = authCode
                 };
 
@@ -106,7 +105,7 @@ namespace RecipeRepository
                 var user = context.Users.FirstOrDefault(u => u.SessionKey == sessionKey);
                 if (user == null)
                 {
-                    throw new ArgumentException("Invalid user authentication", ("INV_USR_AUTH" + sessionKey));
+                    throw new ArgumentException("Invalid user authentication", ("INV_USR_AUTH " + sessionKey));
                 }
                 return (int)user.UserId;
             }

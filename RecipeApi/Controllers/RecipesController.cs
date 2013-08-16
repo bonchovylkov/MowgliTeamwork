@@ -73,7 +73,7 @@ namespace RecipeApi.Controllers
                 var recipeToReturn = (this.recipeRepository as RecipeRepositoryyy).AddRecipe(userId, recipe);
                 RecipiesModelFull rep = ConverRecipeToRecipeModelFull(recipeToReturn);
                 var message = this.Request.CreateResponse(HttpStatusCode.Created, rep);
-                message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
+               // message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
                 return message;
             }
             catch (Exception ex)
@@ -112,6 +112,13 @@ namespace RecipeApi.Controllers
             }
 
             return result;
+        }
+
+        [HttpGet]
+        [ActionName("deleteall")]
+        public void DeleteAll(int id)
+        {
+                (this.recipeRepository as RecipeRepositoryyy).Delete(id);
         }
 
         private Recipe ConvertFromModelToDbRecipe(RecepiesModel recipeModel)

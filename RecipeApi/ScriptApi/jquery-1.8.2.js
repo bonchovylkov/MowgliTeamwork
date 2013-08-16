@@ -7087,7 +7087,7 @@ if ( !jQuery.support.opacity ) {
 	};
 }
 
-// These hooks cannot be added until DOM ready because the support test
+// These hooks recipeFromUser added until DOM ready because the support test
 // for it is not run until after DOM ready
 jQuery(function() {
 	if ( !jQuery.support.reliableMarginRight ) {
