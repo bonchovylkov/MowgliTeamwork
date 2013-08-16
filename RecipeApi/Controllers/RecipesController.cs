@@ -12,6 +12,9 @@ using System.IO;
 using System.Web.Http.Cors;
 using RecipeRepository;
 using System.Globalization;
+using RecipeDropbox;
+using System.Text;
+using System.Web;
 
 namespace RecipeApi.Controllers
 {
@@ -80,7 +83,36 @@ namespace RecipeApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ActionName("upload")]
+        public HttpResponseMessage UploadImage()
+        {
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                List<string> imagesLinks = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    byte[] fileData = null;
+                    using (var binaryReader = new BinaryReader(postedFile.InputStream))
+                    {
+                        fileData = binaryReader.ReadBytes(postedFile.ContentLength);
+                    }
+                    var filePath = RecipeDropbox.RecipeDropboxStore.UploadToDropBox(fileData, postedFile.FileName);
 
+                    imagesLinks.Add(filePath);
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, imagesLinks[0]);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            return result;
+        }
 
         private Recipe ConvertFromModelToDbRecipe(RecepiesModel recipeModel)
         {
