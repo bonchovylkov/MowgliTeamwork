@@ -22,30 +22,30 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeContext, Configuration>());
 
-            RecipeContext db = new RecipeContext();
-            Step step = new Step
-            {
-                StepText = "test step 7",
+            //RecipeContext db = new RecipeContext();
+            //Step step = new Step
+            //{
+            //    StepText = "test step 7",
 
-            };
+            //};
 
-            var allSteps = db.Steps;
+            //var allSteps = db.Steps;
 
-            foreach (var s in allSteps)
-            {
-                Console.WriteLine(s.StepText);
-            }
+            //foreach (var s in allSteps)
+            //{
+            //    Console.WriteLine(s.StepText);
+            //}
 
-            db.Steps.Add(step);
-            db.SaveChanges();
+            //db.Steps.Add(step);
+            //db.SaveChanges();
 
             
-            Console.WriteLine("test Dropbox");
+            //Console.WriteLine("test Dropbox");
 
-            string recipePictureDropBoxePath = RecipeDropboxStore.UploadToDropBox("../../springFlowers.jpg", "springFlowers.jpg");
-            Console.WriteLine(recipePictureDropBoxePath);
+            //string recipePictureDropBoxePath = RecipeDropboxStore.UploadToDropBox("../../springFlowers.jpg", "springFlowers.jpg");
+            //Console.WriteLine(recipePictureDropBoxePath);
         
         }
     }

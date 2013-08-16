@@ -9,7 +9,7 @@ using System.Xml.XPath;
 namespace RecipeApi.Areas.HelpPage
 {
     /// <summary>
-    /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+    /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation fileBytes.
     /// </summary>
     public class XmlDocumentationProvider : IDocumentationProvider
     {

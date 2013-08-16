@@ -330,6 +330,10 @@
       <Project>{93c8ed71-dd4c-4b88-8514-4697b353a366}</Project>
       <Name>RecipeData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RecipeDropbox\RecipeDropbox.csproj">
+      <Project>{cdc842f1-a883-484e-a969-737038f90df4}</Project>
+      <Name>RecipeDropbox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecipeModels\RecipeModels.csproj">
       <Project>{c879d997-71cb-4520-a15a-a4503bb51c2c}</Project>
       <Name>RecipeModels</Name>
