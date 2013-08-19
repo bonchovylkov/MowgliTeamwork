@@ -31,24 +31,25 @@
 				nickname +
 		'</span>' +
 		'<button id="btn-logout">Logout</button><br/>' +
-		'<div id="create-game-holder">' +
-			'Title: <input type="text" id="tb-create-title" />' +
-			'Password: <input type="text" id="tb-create-pass" />' +
-			'Number: <input type="text" id="tb-create-number" />' +
-			'<button id="btn-create-game">Create</button>' +
+		'<div id="create-recipe-holder">' +
+			'Name: <input type="text" id="tb-create-name" />' +
+			'Products: <input type="text" id="tb-create-products" />' +
+			'Steps: <input type="text" id="tb-create-steps" />' +
+			'<button id="btn-create-recipe">Create</button>' +
 		'</div>' +
-		'<div id="open-games-container">' +
-			'<h2>Open</h2>' +
-			'<div id="open-games"></div>' +
+		'<div id="all-recipes-container">' +
+			'<h2>All recipes</h2>' +
+			'<div id="all-recipes"></div>' +
 		'</div>' +
-		'<div id="active-games-container">' +
-			'<h2>Active</h2>' +
-			'<div id="active-games"></div>' +
+		'<div id="my-recipes-container">' +
+			'<h2>My recipes</h2>' +
+			'<div id="my-recipes"></div>' +
 		'</div>' +
-		'<div id="game-holder">' +
+		'<div id="recipe-holder">' +
 		'</div>' +
 		'<div id="messages-holder">' +
 		'</div>';
+
 		return html;
 	}
 
@@ -70,36 +71,25 @@
 	//	return list;
 	//}
 
-	//function buildRecipeFromUser(games) {
-	//	var gamesList = Array.prototype.slice.call(games, 0);
-	//	gamesList.sort(function (g1, g2) {
-	//		if (g1.status == g2.status) {
-	//			return g1.title > g2.title;
-	//		}
-	//		else {
-	//			if (g1.status == "in-progress") {
-	//				return -1;
-	//			}
-	//		}
-	//		return 1;
-	//	});
+	function buildRecipeFromUser(recipes) {
+	    var list = '<ul class="recipes-list user-recipes">';
 
-	//	var list = '<ul class="game-list active-games">';
-	//	for (var i = 0; i < gamesList.length; i++) {
-	//		var game = gamesList[i];
-	//		list +=
-	//			'<li class="game-status-' + game.status + '" data-game-id="' + game.id + '" data-creator="' + game.creatorNickname + '">' +
-	//				'<a href="#" class="btn-active-game">' +
-	//					$("<div />").html(game.title).text() +
-	//				'</a>' +
-	//				'<span> by ' +
-	//					game.creatorNickname +
-	//				'</span>' +
-	//			'</li>';
-	//	}
-	//	list += "</ul>";
-	//	return list;
-	//}
+	    for (var i = 0; i < recipes.length; i++) {
+	        var recipe = recipes[i];
+			list +=
+				'<li recipe-id="' + recipe.id + '" recipe-creator="' + recipe.creatorNickname + '">' +
+					'<a href="#" class="btn-recipe">' +
+						$("<div />").html(recipe.title).text() +
+					'</a>' +
+					'<span> by ' +
+						game.creatorNickname +
+					'</span>' +
+				'</li>';
+		}
+	    list += "</ul>";
+
+		return list;
+	}
 
 	//function buildGuessTable(guesses) {
 	//	var tableHtml =
