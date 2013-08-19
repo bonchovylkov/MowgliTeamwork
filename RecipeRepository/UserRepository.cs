@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RecipeModels;
-namespace RecipeRepository
+
+namespace RecipeRepositories
 {
     public class UserRepository : IRepository<User>
     {
@@ -92,6 +93,7 @@ namespace RecipeRepository
                 var sessionKey = GenerateSessionKey((int)user.UserId);
                 user.SessionKey = sessionKey;
                 context.SaveChanges();
+
                 return user;
             }
         }
@@ -113,7 +115,6 @@ namespace RecipeRepository
 
         public  void LogoutUser(string sessionKey)
         {
-
             var context = new RecipeContext();
             using (context)
             {

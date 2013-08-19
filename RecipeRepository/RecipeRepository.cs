@@ -1,6 +1,6 @@
 ﻿using RecipeData;
 using RecipeModels;
-using RecipeRepository;
+using RecipeRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,11 @@ using RecipeDropbox;
 
 namespace RecipeRepositories
 {
-    public class RecipeRepositoryyy : IRepository<Recipe>
+    public class RecipeRepository : IRepository<Recipe>
     {
         
 
-        public RecipeRepositoryyy(RecipeContext context)
+        public RecipeRepository(RecipeContext context)
         {
             
         }

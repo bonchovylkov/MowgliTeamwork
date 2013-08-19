@@ -8,7 +8,7 @@
 						'<label for="tb-login-username">Username: </label>' +
 						'<input type="text" id="tb-login-username"><br />' +
 						'<label for="tb-login-password">Password: </label>' +
-						'<input type="text" id="tb-login-password"><br />' +
+						'<input type="password" id="tb-login-password"><br />' +
 						'<button id="btn-login" class="button">Login</button>' +
 					'</div>' +
 					'<div id="register-form" style="display: none">' +
@@ -26,31 +26,31 @@
 		return html;
 	}
 
-	//function buildrecipeUI(nickname) {
-	//	var html = '<span id="user-nickname">' +
-	//			nickname +
-	//	'</span>' +
-	//	'<button id="btn-logout">Logout</button><br/>' +
-	//	'<div id="create-game-holder">' +
-	//		'Title: <input type="text" id="tb-create-title" />' +
-	//		'Password: <input type="text" id="tb-create-pass" />' +
-	//		'Number: <input type="text" id="tb-create-number" />' +
-	//		'<button id="btn-create-game">Create</button>' +
-	//	'</div>' +
-	//	'<div id="open-games-container">' +
-	//		'<h2>Open</h2>' +
-	//		'<div id="open-games"></div>' +
-	//	'</div>' +
-	//	'<div id="active-games-container">' +
-	//		'<h2>Active</h2>' +
-	//		'<div id="active-games"></div>' +
-	//	'</div>' +
-	//	'<div id="game-holder">' +
-	//	'</div>' +
-	//	'<div id="messages-holder">' +
-	//	'</div>';
-	//	return html;
-	//}
+	function buildRecipeUI(nickname) {
+		var html = '<span id="user-nickname">' +
+				nickname +
+		'</span>' +
+		'<button id="btn-logout">Logout</button><br/>' +
+		'<div id="create-game-holder">' +
+			'Title: <input type="text" id="tb-create-title" />' +
+			'Password: <input type="text" id="tb-create-pass" />' +
+			'Number: <input type="text" id="tb-create-number" />' +
+			'<button id="btn-create-game">Create</button>' +
+		'</div>' +
+		'<div id="open-games-container">' +
+			'<h2>Open</h2>' +
+			'<div id="open-games"></div>' +
+		'</div>' +
+		'<div id="active-games-container">' +
+			'<h2>Active</h2>' +
+			'<div id="active-games"></div>' +
+		'</div>' +
+		'<div id="game-holder">' +
+		'</div>' +
+		'<div id="messages-holder">' +
+		'</div>';
+		return html;
+	}
 
 	//function buildloadAllReps(games) {
 	//	var list = '<ul class="game-list open-games">';
@@ -70,7 +70,7 @@
 	//	return list;
 	//}
 
-	//function buildrecipeFromUser(games) {
+	//function buildRecipeFromUser(games) {
 	//	var gamesList = Array.prototype.slice.call(games, 0);
 	//	gamesList.sort(function (g1, g2) {
 	//		if (g1.status == g2.status) {
@@ -166,7 +166,7 @@
 	//}
 
 	return {
-		//recipeUI: buildrecipeUI
+		recipeUI: buildRecipeUI,
 		//loadAllReps: buildloadAllReps,
 		loginForm: buildLoginForm
 		//recipeFromUser: buildrecipeFromUser,

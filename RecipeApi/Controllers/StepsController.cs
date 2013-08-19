@@ -4,11 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using RecipeRepository;
+using RecipeRepositories;
 using RecipeModels;
 using RecipeData;
 using RecipeApi.Models;
-using RecipeRepositories;
 using System.Globalization;
 
 namespace RecipeApi.Controllers

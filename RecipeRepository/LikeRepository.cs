@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RecipeRepository
+namespace RecipeRepositories
 {
     public class LikeRepository : IRepository<Like>
     {

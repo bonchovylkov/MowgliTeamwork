@@ -10,7 +10,6 @@ using RecipeData;
 using RecipeModels;
 using System.IO;
 using System.Web.Http.Cors;
-using RecipeRepository;
 using System.Globalization;
 using RecipeDropbox;
 using System.Text;
@@ -24,12 +23,12 @@ namespace RecipeApi.Controllers
 
         public RecipesController()
         {
-            this.recipeRepository = new RecipeRepositoryyy(new RecipeContext());
+            this.recipeRepository = new RecipeRepository(new RecipeContext());
         }
 
         public RecipesController(IRepository<Recipe> repository)
         {
-            this.recipeRepository = repository as RecipeRepositoryyy;
+            this.recipeRepository = repository as RecipeRepository;
         }
 
         // GET api/recipes
@@ -37,7 +36,7 @@ namespace RecipeApi.Controllers
         [ActionName("getall")]
         public IEnumerable<RecepiesModel> GetAllRecipies(string sessionKey)
         {
-            var allRecipes = (this.recipeRepository as RecipeRepositoryyy).GetAllRecipies();
+            var allRecipes = (this.recipeRepository as RecipeRepository).GetAllRecipies();
             var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes);
             return allRecipesModel.AsEnumerable();
         }
@@ -49,7 +48,7 @@ namespace RecipeApi.Controllers
             try{
             var UserRep = new UserRepository(new RecipeContext());
             var userId = UserRep.LoginUser(sessionKey);
-            var recipiesByUser = (this.recipeRepository as RecipeRepositoryyy).GetRecipiesByUser(userId);
+            var recipiesByUser = (this.recipeRepository as RecipeRepository).GetRecipiesByUser(userId);
             var allRecipesModel = ConvertRecipesToRecipesModel(recipiesByUser);
             var message = this.Request.CreateResponse(HttpStatusCode.Created, allRecipesModel);
             return message;
@@ -70,7 +69,7 @@ namespace RecipeApi.Controllers
                 var UserRep = new UserRepository(new RecipeContext());
                 var userId = UserRep.LoginUser(sessionKey);
                 var recipe = ConvertFromModelToDbRecipe(recipeModel);
-                var recipeToReturn = (this.recipeRepository as RecipeRepositoryyy).AddRecipe(userId, recipe);
+                var recipeToReturn = (this.recipeRepository as RecipeRepository).AddRecipe(userId, recipe);
                 RecipiesModelFull rep = ConverRecipeToRecipeModelFull(recipeToReturn);
                 var message = this.Request.CreateResponse(HttpStatusCode.Created, rep);
                // message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
@@ -118,7 +117,7 @@ namespace RecipeApi.Controllers
         [ActionName("deleteall")]
         public void DeleteAll(int id)
         {
-                (this.recipeRepository as RecipeRepositoryyy).Delete(id);
+                (this.recipeRepository as RecipeRepository).Delete(id);
         }
 
         private Recipe ConvertFromModelToDbRecipe(RecepiesModel recipeModel)

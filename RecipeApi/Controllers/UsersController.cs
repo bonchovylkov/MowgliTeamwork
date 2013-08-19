@@ -7,7 +7,7 @@ using System.Web.Http;
 using RecipeModels;
 using RecipeData;
 using RecipeApi.Models;
-using RecipeRepository;
+using RecipeRepositories;
 using System.Globalization;
 
 namespace RecipeApi.Controllers
@@ -81,11 +81,10 @@ namespace RecipeApi.Controllers
 
         [HttpGet]
         [ActionName("logout")]
-        public HttpResponseMessage LogoutUser(string sessionKey)
+        public HttpResponseMessage LogoutUser([FromUri]string sessionKey)
         {
-
             (this.data as UserRepository).LogoutUser(sessionKey);
-            var message = this.Request.CreateResponse(HttpStatusCode.Gone);
+            var message = this.Request.CreateResponse(HttpStatusCode.OK);
             return message;
         }
 
