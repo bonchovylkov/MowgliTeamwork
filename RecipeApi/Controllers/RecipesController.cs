@@ -37,7 +37,7 @@ namespace RecipeApi.Controllers
         public IEnumerable<RecepiesModel> GetAllRecipies(string sessionKey)
         {
             IQueryable<Recipe> allRecipes = (this.recipeRepository as RecipeRepository).GetAllRecipies();
-            var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes as ICollection<Recipe>);
+            var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes.ToList() as ICollection<Recipe>);
             return allRecipesModel.AsEnumerable();
         }
 
@@ -140,7 +140,7 @@ namespace RecipeApi.Controllers
                            {
                                RecipeId = r.RecipeId,
                                RecipeName = r.RecipeName,
-                               FromUser = r.User.UserName,
+                               FromUser = r.User == null ? "no user" : r.User.UserName,
                                PictureLink = r.PictureLink,
                                Products = r.Products
                            });

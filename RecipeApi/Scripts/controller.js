@@ -3,11 +3,15 @@
 /// <reference path="jquery-2.0.2.js" />
 /// <reference path="ui.js" />
 
+
+
+//THE ORIGINAL ONE
 var controllers = (function () {
 
 	var updateTimer = null;
 
-	var rootUrl = "http://mowgliteam.apphb.com/api/";
+	//var rootUrl = "http://mowgliteam.apphb.com/api/";
+	var rootUrl = "http://localhost:12789/api/";
 	var Controller = Class.create({
 		init: function () {
 			this.persister = persisters.get(rootUrl);
