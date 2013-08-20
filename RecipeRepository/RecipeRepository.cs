@@ -19,13 +19,13 @@ namespace RecipeRepositories
             
         }
 
-        public IQueryable<Recipe> GetRecipiesByUser(int userId)
+        public ICollection<Recipe> GetRecipiesByUser(int userId)
         {
             var context = new RecipeContext();
             var user = context.Users.FirstOrDefault(u => u.UserId == userId);
             if (user!=null)
             {
-                return user.Recipes as IQueryable<Recipe>;
+                return user.Recipes;
             }
             else
             {
@@ -34,10 +34,10 @@ namespace RecipeRepositories
 
         }
 
-        public IQueryable<Recipe> GetAllRecipies()
+        public ICollection<Recipe> GetAllRecipies()
         {
             var context = new RecipeContext();
-            return context.Recipies;
+            return context.Recipies as ICollection<Recipe>;
         }
 
         public Recipe AddRecipe(int userId, Recipe recipe)

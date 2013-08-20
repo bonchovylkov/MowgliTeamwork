@@ -92,7 +92,7 @@
 					'<a href="#" >' +
 						$("<div />").html(rep.RecipeName).text() +
 					'</a>' +
-					'<span> Made from' +
+					'<span> Made from ' +
 						rep.Products +
 					'</span>' +
 				'</li>';

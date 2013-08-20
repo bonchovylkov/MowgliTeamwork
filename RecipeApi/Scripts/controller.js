@@ -88,7 +88,7 @@ var controllers = (function () {
 			wrapper.on("click", "#btn-logout", function () {
 				self.persister.user.logout(function () {
 					self.loadLoginFormUI(selector);
-					alert("sucsses");
+					//alert("sucsses");
 				}, function (err) {
 				    self.loadLoginFormUI(selector);
 				});

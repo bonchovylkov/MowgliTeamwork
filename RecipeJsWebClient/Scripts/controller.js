@@ -91,7 +91,8 @@ var controllers = (function () {
 					self.loadLoginFormUI(selector);
 					clearInterval(updateTimer);
 				}, function (err) {
-				    console.log(err);
+				    self.loadLoginFormUI(selector);
+				   // console.log(err);
 				});
 			});
 

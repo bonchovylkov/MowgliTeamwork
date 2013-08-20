@@ -36,7 +36,7 @@ namespace RecipeApi.Controllers
         [ActionName("getall")]
         public IEnumerable<RecepiesModel> GetAllRecipies(string sessionKey)
         {
-            var allRecipes = (this.recipeRepository as RecipeRepository).GetAllRecipies();
+            ICollection<Recipe> allRecipes = (this.recipeRepository as RecipeRepository).GetAllRecipies();
             var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes);
             return allRecipesModel.AsEnumerable();
         }
@@ -45,7 +45,8 @@ namespace RecipeApi.Controllers
         [ActionName("getbyuser")]
         public HttpResponseMessage GetRecipiesByUser(string sessionKey)
         {
-            try{
+            try
+            {
             var UserRep = new UserRepository(new RecipeContext());
             var userId = UserRep.LoginUser(sessionKey);
             var recipiesByUser = (this.recipeRepository as RecipeRepository).GetRecipiesByUser(userId);
@@ -132,7 +133,7 @@ namespace RecipeApi.Controllers
         }
 
 
-        private IQueryable<RecepiesModel> ConvertRecipesToRecipesModel(IQueryable<Recipe> allRecipes)
+        private IEnumerable<RecepiesModel> ConvertRecipesToRecipesModel(ICollection<Recipe> allRecipes)
         {
             var recipes = (from r in allRecipes
                            select new RecepiesModel
