@@ -36,8 +36,8 @@ namespace RecipeApi.Controllers
         [ActionName("getall")]
         public IEnumerable<RecepiesModel> GetAllRecipies(string sessionKey)
         {
-            ICollection<Recipe> allRecipes = (this.recipeRepository as RecipeRepository).GetAllRecipies();
-            var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes);
+            IQueryable<Recipe> allRecipes = (this.recipeRepository as RecipeRepository).GetAllRecipies();
+            var allRecipesModel = ConvertRecipesToRecipesModel(allRecipes as ICollection<Recipe>);
             return allRecipesModel.AsEnumerable();
         }
 

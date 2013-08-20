@@ -34,10 +34,10 @@ namespace RecipeRepositories
 
         }
 
-        public ICollection<Recipe> GetAllRecipies()
+        public IQueryable<Recipe> GetAllRecipies()
         {
             var context = new RecipeContext();
-            return context.Recipies as ICollection<Recipe>;
+            return context.Recipies;
         }
 
         public Recipe AddRecipe(int userId, Recipe recipe)
