@@ -104,7 +104,7 @@ var controllers = (function () {
 			    var recipe = {
 			        RecipeName: $(selector).find("#RecipeName").val(),
 			        Products: $(selector).find("#products").val(),
-                    Link: imageUrl
+			        PictureLink: imageUrl
 			    }
 
 			    self.persister.recipe.addRecipe(recipe, function (data) {
@@ -134,7 +134,7 @@ var controllers = (function () {
 			            imageUrl = data;
 			        },
 			        error: function errorFunc(data) {
-			            alert("error " + data);
+			            alert("error " + JSON.stringify(data));
 			        }
 			    });
 			});

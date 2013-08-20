@@ -127,7 +127,7 @@ namespace RecipeApi.Controllers
             {
                 RecipeName = recipeModel.RecipeName,
                 Products = recipeModel.Products,
-                // PictureLink = recipeModel.PictureLink
+                PictureLink = recipeModel.PictureLink
             };
             return rep;
         }
