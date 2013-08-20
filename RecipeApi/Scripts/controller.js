@@ -10,8 +10,8 @@ var controllers = (function () {
 
 	var updateTimer = null;
 
-	//var rootUrl = "http://mowgliteam.apphb.com/api/";
-    var rootUrl = "http://localhost:12789/api/";
+	var rootUrl = "http://mowgliteam.apphb.com/api/";
+   // var rootUrl = "http://localhost:12789/api/";
 	var imageUrl = "";
 
 	var Controller = Class.create({
@@ -120,10 +120,7 @@ var controllers = (function () {
 			wrapper.on("click", ".recipe", function () {
 			    var recipeNumber = $(this).attr("data-game-id");
 
-			    self.persister.recipe.addRecipe(recipe, function (data) {
-			        var html = ui.AddRecipe(data);
-			        $(selector + " #allRecipies ul").append(html);
-			        $(selector + " #userReps ul").append(html);
+			    self.persister.recipe.getOneRecipe(recipeNumber, function (data) {
 			        alert(JSON.stringify(data));
 			    }, function (err) {
 			        alert(JSON.stringify(err));

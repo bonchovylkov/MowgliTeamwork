@@ -94,6 +94,15 @@ var persisters = (function () {
 				    success(data);
 				}, error);
 	    },
+	    getOneRecipe: function (id,success, error) {
+	        var url = this.rootUrl + "getrecipe/" + sessionKey + "/" + id;
+
+	        httpRequester.getJSON(url,
+				function (data) {
+				    success(data);
+				}, error);
+	    },
+
 	    getAll: function (success, error) {
 	        var url = this.rootUrl + "getall/" + sessionKey;
 	       
