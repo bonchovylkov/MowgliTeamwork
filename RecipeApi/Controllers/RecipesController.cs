@@ -83,6 +83,26 @@ namespace RecipeApi.Controllers
             }
         }
 
+        [HttpGet]
+        [ActionName("getrecipe")]
+        public HttpResponseMessage GetRecipeById(int id,string sessionKey)
+        {
+            try
+            {
+                var UserRep = new UserRepository(new RecipeContext());
+                var recipe = (this.recipeRepository as RecipeRepository).GetRecipe(id);
+                RecipiesModelFull rep = ConverRecipeToRecipeModelFull(recipe);
+                var message = this.Request.CreateResponse(HttpStatusCode.Created, rep);
+                // message.Headers.Location = new Uri(this.Request.RequestUri + recipeToReturn.RecipeId.ToString(CultureInfo.InvariantCulture));
+                return message;
+            }
+            catch (Exception ex)
+            {
+                var response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+                return response;
+            }
+        }
+
         [HttpPost]
         [ActionName("upload")]
         public HttpResponseMessage UploadImage()

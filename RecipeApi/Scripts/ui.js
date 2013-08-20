@@ -61,11 +61,11 @@ var ui = (function () {
 		for (var i = 0; i < Recipe.length; i++) {
 			var rep = Recipe[i];
 			list +=
-				'<li data-game-id="' + rep.RecipeId + '">  Name:' +
+				'<li data-game-id="' + rep.RecipeId + '" class="recipe">  Name:' +
 					'<a href="#" >' +
 						$("<div />").html(rep.RecipeName).text() +
 					'</a>' +
-					'<span> Made from' +
+					'<span> Made from ' +
 						rep.Products +
 					'</span>' +
 				'</li>';
@@ -92,7 +92,7 @@ var ui = (function () {
 	    for (var i = 0; i < Recipe.length; i++) {
 	        var rep = Recipe[i];
 	        list +=
-				'<li data-game-id="' + rep.RecipeId + '">  Name:' +
+				'<li data-game-id="' + rep.RecipeId + '"  class="recipe">  Name:' +
 					'<a href="#" >' +
 						$("<div />").html(rep.RecipeName).text() +
 					'</a>' +
@@ -107,7 +107,7 @@ var ui = (function () {
 
 	function UploadLastRecipe(recipe) {
 	 var   list =
-				'<li data-game-id="' + recipe.RecipeId + '">  Name:' +
+				'<li data-game-id="' + recipe.RecipeId + '" class="recipe">  Name:' +
 					'<a href="#" >' +
 						$("<div />").html(recipe.RecipeName).text() +
 					'</a>' +

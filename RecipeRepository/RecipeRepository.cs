@@ -90,5 +90,20 @@ namespace RecipeRepositories
         {
             throw new NotImplementedException();
         }
+
+        public Recipe GetRecipe(int id)
+        {
+            var context = new RecipeContext();
+            Recipe rep = context.Recipies.FirstOrDefault(r=>r.RecipeId==id);
+            if (rep!=null)
+            {
+                return rep;
+            }
+            else
+            {
+                throw new InvalidOperationException("The recipe cannot be found");
+            }
+
+        }
     }
 }
