@@ -1,4 +1,7 @@
-﻿var ui = (function () {
+﻿/// <reference path="jquery-2.0.2.js" />
+
+
+var ui = (function () {
 
 	function buildLoginForm() {
 		var html =
@@ -102,6 +105,21 @@
 	    return list;
 	}
 
+	function UploadLastRecipe(recipe) {
+	 var   list =
+				'<li data-game-id="' + recipe.RecipeId + '">  Name:' +
+					'<a href="#" >' +
+						$("<div />").html(recipe.RecipeName).text() +
+					'</a>' +
+					'<span> Made from ' +
+						recipe.Products +
+					'</span>' +
+				'</li>';
+	    return list;
+
+
+	}
+
 	//function buildGuessTable(guesses) {
 	//	var tableHtml =
 	//		'<table border="1" cellspacing="0" cellpadding="5">' +
@@ -170,7 +188,8 @@
 		recipeUI: buildrecipeUI,
 		loadAllReps: buildloadAllReps,
 		loginForm: buildLoginForm,
-	    recipeFromUser: buildActiveRecipeList,
+		recipeFromUser: buildActiveRecipeList,
+	    AddRecipe:UploadLastRecipe
 		//Recipetate: buildRecipetate,
 		//messagesList: buildMessagesList
 	}

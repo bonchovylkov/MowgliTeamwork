@@ -116,9 +116,9 @@ namespace RecipeApi.Controllers
 
         [HttpGet]
         [ActionName("deleteall")]
-        public void DeleteAll(int id)
+        public void DeleteAll()
         {
-                (this.recipeRepository as RecipeRepository).Delete(id);
+                (this.recipeRepository as RecipeRepository).Delete();
         }
 
         private Recipe ConvertFromModelToDbRecipe(RecepiesModel recipeModel)

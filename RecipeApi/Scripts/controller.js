@@ -108,8 +108,8 @@ var controllers = (function () {
 			    }
 
 			    self.persister.recipe.addRecipe(recipe, function (data) {
-			        //ui.AddRecipe(data);
-			        //self.loadLoginFormUI(selector);
+			      var html =  ui.AddRecipe(data);
+			      $(selector + " #allRecipies ul").append(html);
 			        alert(JSON.stringify(data));    
 			    }, function (err) {
 			        alert(JSON.stringify(err));

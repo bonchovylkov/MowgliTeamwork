@@ -69,11 +69,7 @@ namespace RecipeApi.Controllers
         //{
         //}
 
-        // DELETE api/likes/5
-        public void Delete(int id)
-        {
-            this.data.Delete(id);
-        }
+      
 
         private IEnumerable<LikesModel> ConvertLikes(IEnumerable<Like> likes)
         {

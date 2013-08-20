@@ -68,11 +68,7 @@ namespace RecipeApi.Controllers
         //{
         //}
 
-        // DELETE api/comments/5
-        public void Delete(int id)
-        {
-            this.data.Delete(id);
-        }
+       
 
         private IEnumerable<CommentsModel> ConvertComments(IEnumerable<Comment> comments)
         {

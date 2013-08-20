@@ -66,11 +66,7 @@ namespace RecipeApi.Controllers
             }
         }
 
-        // DELETE api/steps/5
-        public void Delete(int id)
-        {
-            this.data.Delete(id);
-        }
+      
 
         private IEnumerable<StepModel> ConvertStepsToStepsModel(IQueryable<Step> allSteps)
         {
