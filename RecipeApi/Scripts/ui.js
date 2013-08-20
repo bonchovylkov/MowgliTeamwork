@@ -47,6 +47,7 @@
             '<input type="text" id="products"><br />' +
             '<label for="pictures">Recipe Picture: </label>' +
             '<input name="image" type="file" id="pictures"><br />' +
+            '<button id="upload-picture" class="button">Upload Picture</button>' +
             '<button id="add-recipe" class="button">Add Recipe</button>' +
 		'</div>';
 		return html;

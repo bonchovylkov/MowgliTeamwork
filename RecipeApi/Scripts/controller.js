@@ -12,6 +12,8 @@ var controllers = (function () {
 
 	//var rootUrl = "http://mowgliteam.apphb.com/api/";
 	var rootUrl = "http://localhost:12789/api/";
+	var imageUrl = "";
+
 	var Controller = Class.create({
 		init: function () {
 			this.persister = persisters.get(rootUrl);
@@ -101,7 +103,8 @@ var controllers = (function () {
 			wrapper.on("click", "#add-recipe", function () {
 			    var recipe = {
 			        RecipeName: $(selector).find("#RecipeName").val(),
-			        Products: $(selector).find("#products").val()
+			        Products: $(selector).find("#products").val(),
+                    Link: imageUrl
 			    }
 
 			    self.persister.recipe.addRecipe(recipe, function (data) {
@@ -110,6 +113,29 @@ var controllers = (function () {
 			        alert(JSON.stringify(data));    
 			    }, function (err) {
 			        alert(JSON.stringify(err));
+			    });
+			});
+			wrapper.on("click", "#upload-picture", function upload() {
+			    var ourUploadUrl = rootUrl + "recipes/upload"
+
+			    var data = new FormData();
+			    jQuery.each($('#pictures')[0].files, function (i, file) {
+			        data.append('file-' + i, file);
+			    });
+
+			    $.ajax({
+			        url: ourUploadUrl,
+			        data: data,
+			        cache: false,
+			        contentType: false,
+			        processData: false,
+			        type: 'POST',
+			        success: function successFunc(data) {
+			            imageUrl = data;
+			        },
+			        error: function errorFunc(data) {
+			            alert("error " + data);
+			        }
 			    });
 			});
 
